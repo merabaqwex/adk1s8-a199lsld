@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Michel Thomas · İspanyolca</title>
+<meta name="theme-color" content="#14110f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MT Español">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{
+  --bg:#14110f; --bg2:#1d1916; --card:#241f1b; --line:#3a322b;
+  --ink:#f4ede4; --mute:#a99d90; --dim:#6f655b;
+  --red:#e8553e; --gold:#e8b021; --ok:#4cbf7f;
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+a{color:inherit}
+header{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 70%,transparent);
+  padding:calc(var(--safe-t) + 14px) 16px 10px;display:flex;align-items:center;gap:12px}
+header h1{font-size:20px;margin:0;letter-spacing:-.01em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header .back{width:40px;height:40px;border-radius:12px;background:var(--card);display:grid;place-items:center;font-size:22px}
+.flag{display:inline-block;width:22px;height:15px;border-radius:3px;vertical-align:-2px;margin-right:8px;
+  background:linear-gradient(var(--red) 0 25%,var(--gold) 25% 75%,var(--red) 75%)}
+main{padding:0 16px calc(130px + var(--safe-b));max-width:720px;margin:0 auto}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:26px 4px 10px;font-weight:600}
+.resume{display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+  background:linear-gradient(135deg,#3a1f17,#2b1d12);border:1px solid #5a3424;border-radius:20px;padding:16px;margin-top:4px}
+.resume .big{width:56px;height:56px;border-radius:50%;background:var(--red);display:grid;place-items:center;flex:none}
+.resume small{color:#e9b9a6;display:block;font-size:13px}
+.resume b{display:block;font-size:17px;margin-top:2px}
+.step{display:flex;gap:14px;align-items:stretch;width:100%;text-align:left;background:var(--card);
+  border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px}
+.step .num{width:48px;flex:none;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:20px;color:#14110f}
+.step .num.opt{font-size:12px;font-weight:700}
+.step b{font-size:17px}
+.step p{margin:3px 0 8px;color:var(--mute);font-size:14px}
+.bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok);border-radius:3px}
+.meta{font-size:12px;color:var(--dim);margin-top:6px}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:#2f2822;color:var(--mute);margin-left:6px;vertical-align:2px}
+.disc{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:14px;overflow:hidden}
+.disc-h{display:flex;align-items:center;gap:10px;padding:14px 14px 12px}
+.disc-h b{font-size:18px;flex:1}
+.disc-h .cnt{font-size:12px;color:var(--mute)}
+.btn{padding:9px 13px;border-radius:12px;background:#2f2822;font-size:14px;font-weight:600;white-space:nowrap}
+.btn.pri{background:var(--red);color:#fff}
+.btn.ghost{background:none;color:var(--dim);padding:9px 6px}
+.desc{padding:0 14px 12px;color:var(--mute);font-size:13px}
+.trk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-top:1px solid var(--line);min-height:58px}
+.trk .n{width:30px;flex:none;color:var(--dim);font-variant-numeric:tabular-nums;font-weight:700;text-align:center}
+.trk .t{flex:1;min-width:0}
+.trk .t span{display:block;font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trk.off{opacity:.42}
+.trk.now{background:#33231b}
+.trk.now .n{color:var(--red)}
+.trk .st{width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--line)}
+.trk .st.done{background:var(--ok);border-color:var(--ok);display:grid;place-items:center;color:#14110f;font-size:13px;font-weight:900}
+.trk .st.done::after{content:"✓"}
+.note{background:var(--bg2);border:1px dashed var(--line);border-radius:14px;padding:12px 14px;color:var(--mute);font-size:14px;margin-top:10px}
+.note b{color:var(--ink)}
+.empty{padding:14px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
+
+/* mini player */
+#mini{position:fixed;left:10px;right:10px;bottom:calc(10px + var(--safe-b));z-index:10;max-width:700px;margin:0 auto;
+  background:#2a221d;border:1px solid #4a3a30;border-radius:20px;display:none;align-items:center;gap:10px;padding:10px 10px 10px 14px;
+  box-shadow:0 10px 30px #0008}
+#mini.on{display:flex}
+#mini .info{flex:1;min-width:0}
+#mini .info b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#mini .info small{color:var(--mute);font-size:12px}
+#mini .pp{width:50px;height:50px;border-radius:50%;background:var(--red);display:grid;place-items:center;flex:none}
+#mini .prog{position:absolute;left:18px;right:18px;bottom:4px;height:3px;background:#0004;border-radius:2px;overflow:hidden}
+#mini .prog i{display:block;height:100%;width:0;background:var(--gold)}
+
+/* car mode */
+#car{position:fixed;inset:0;z-index:20;background:#0e0c0b;display:none;flex-direction:column;
+  padding:calc(var(--safe-t) + 12px) 18px calc(var(--safe-b) + 18px)}
+#car.on{display:flex}
+#car .top{display:flex;justify-content:space-between;align-items:center}
+#car .close{width:48px;height:48px;border-radius:14px;background:var(--card);font-size:24px}
+#car .where{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:10px 0}
+#car .where small{color:var(--mute);font-size:16px}
+#car .where b{font-size:26px;line-height:1.25;margin:10px 0 4px;letter-spacing:-.01em}
+#car .where span{color:var(--dim);font-size:14px}
+#car input[type=range]{width:100%;accent-color:var(--gold);height:30px}
+#car .times{display:flex;justify-content:space-between;color:var(--mute);font-variant-numeric:tabular-nums;font-size:14px}
+#car .ctrls{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:12px;margin-top:14px;align-items:center}
+#car .ctrls button{height:96px;border-radius:24px;background:var(--card);display:grid;place-items:center}
+#car .ctrls .play{height:130px;background:var(--red)}
+#car .row2{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+#car .row2 button{height:64px;border-radius:18px;background:var(--bg2);font-weight:700;font-size:18px}
+svg{display:block}
+.toast{position:fixed;left:50%;top:calc(var(--safe-t) + 12px);transform:translateX(-50%);background:#f4ede4;color:#14110f;
+  padding:10px 16px;border-radius:12px;font-weight:600;z-index:30;font-size:14px;max-width:90vw;text-align:center}
+</style>
+</head>
+<body>
+<header id="hdr"></header>
+<main id="app"></main>
+
+<div id="mini">
+  <div class="info" id="miniInfo"><b></b><small></small></div>
+  <button class="pp" id="miniPP" aria-label="Oynat/Duraklat"></button>
+  <div class="prog"><i id="miniProg"></i></div>
+</div>
+
+<div id="car">
+  <div class="top">
+    <button class="close" id="carClose" aria-label="Kapat">⌄</button>
+    <button class="btn" id="spd">1.0×</button>
+  </div>
+  <div class="where"><small id="cCourse"></small><b id="cTitle"></b><span id="cRef"></span></div>
+  <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Konum">
+  <div class="times"><span id="tCur">0:00</span><span id="tDur">0:00</span></div>
+  <div class="ctrls">
+    <button id="prev" aria-label="Önceki parça"></button>
+    <button id="play" class="play" aria-label="Oynat/Duraklat"></button>
+    <button id="next" aria-label="Sonraki parça"></button>
+  </div>
+  <div class="row2">
+    <button id="back15">−15 sn</button>
+    <button id="markDone">✓ Bitti</button>
+    <button id="fwd15">+15 sn</button>
+  </div>
+</div>
+
+<input type="file" id="picker" multiple accept="audio/*,.mp3,.m4a,.aac,.wav" hidden>
+<audio id="au" preload="auto" playsinline></audio>
+
+<script src="data.js"></script>
+<script>
+"use strict";
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ICON = {
+  play: '<svg width="34" height="34" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
+  pause: '<svg width="34" height="34" viewBox="0 0 24 24"><rect fill="currentColor" x="6" y="5" width="4.2" height="14" rx="1.2"/><rect fill="currentColor" x="13.8" y="5" width="4.2" height="14" rx="1.2"/></svg>',
+  prev: '<svg width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M6 5h2v14H6zM20 6.2v11.6a.8.8 0 0 1-1.2.7L9.6 12.7a.8.8 0 0 1 0-1.4l9.2-5.8a.8.8 0 0 1 1.2.7z"/></svg>',
+  next: '<svg width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M16 5h2v14h-2zM4 6.2v11.6a.8.8 0 0 0 1.2.7l9.2-5.8a.8.8 0 0 0 0-1.4L5.2 5.5A.8.8 0 0 0 4 6.2z"/></svg>'
+};
+
+/* ---------- depolama ---------- */
+const LS = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+let DB;
+function openDB() {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open("mt-audio", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("files");
+    r.onsuccess = () => { DB = r.result; res(); };
+    r.onerror = () => rej(r.error);
+  });
+}
+const idb = (mode, fn) => new Promise((res, rej) => {
+  const tx = DB.transaction("files", mode), st = tx.objectStore("files");
+  const out = fn(st); tx.oncomplete = () => res(out && out.result); tx.onerror = () => rej(tx.error);
+});
+const putFile = (k, v) => idb("readwrite", (s) => s.put(v, k));
+const getFile = (k) => idb("readonly", (s) => s.get(k));
+const delFile = (k) => idb("readwrite", (s) => s.delete(k));
+
+const discKey = (c, d) => `${c}|${d}`;
+const trackKey = (c, d, i) => `${c}|${d}|${i}`;
+const loadedNames = (c, d) => LS.get("names:" + discKey(c, d), []);
+let done = new Set(LS.get("done", []));
+const saveDone = () => LS.set("done", [...done]);
+
+/* ---------- veri yardımcıları ---------- */
+const course = (id) => COURSES.find((c) => c.id === id);
+function discTracks(c, d) { // görüntülenecek parça listesi
+  const names = loadedNames(c.id, d.id);
+  const n = d.auto ? names.length : Math.max(d.tracks.length, names.length);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const base = d.tracks[i] || { title: d.auto ? prettyName(names[i]) || `Parça ${i + 1}` : `Parça ${i + 1}` };
+    out.push({ ...base, i, file: names[i], key: trackKey(c.id, d.id, i) });
+  }
+  return out;
+}
+const prettyName = (n) => n ? n.replace(/\.[a-z0-9]+$/i, "").replace(/[_]+/g, " ") : "";
+function courseQueue(c) { // yüklü parçalar, sırayla
+  const q = [];
+  c.discs.forEach((d) => discTracks(c, d).forEach((t) => { if (t.file) q.push({ c, d, t }); }));
+  return q;
+}
+function courseStats(c) {
+  let total = 0, fin = 0, loaded = 0;
+  c.discs.forEach((d) => discTracks(c, d).forEach((t) => { total++; if (done.has(t.key)) fin++; if (t.file) loaded++; }));
+  return { total, fin, loaded };
+}
+const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); const m = Math.floor(s / 60); return `${m}:${String(s % 60).padStart(2, "0")}`; };
+function toast(msg, ms = 2600) { const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.append(t); setTimeout(() => t.remove(), ms); }
+
+/* ---------- görünümler ---------- */
+function render() {
+  const h = location.hash.slice(1);
+  if (h.startsWith("c/")) renderCourse(course(h.slice(2)) || COURSES[0]); else renderHome();
+  syncNowMarkers();
+}
+
+function renderHome() {
+  $("#hdr").innerHTML = `<h1><span class="flag"></span>Michel Thomas · Español</h1>`;
+  const last = LS.get("last");
+  let resume = "";
+  if (last) {
+    const c = course(last.c), d = c && c.discs.find((x) => x.id === last.d), t = d && discTracks(c, d)[last.i];
+    if (t && t.file) resume = `<button class="resume" id="resumeBtn"><span class="big">${ICON.play}</span>
+      <span><small>Kaldığın yerden devam · ${esc(c.short)} ${esc(d.label)} · ${t.i + 1}. parça · ${fmt(last.time)}</small><b>${esc(t.title)}</b></span></button>`;
+  }
+  const card = (c) => {
+    const s = courseStats(c), pct = s.total ? Math.round((s.fin / s.total) * 100) : 0;
+    const num = c.optional ? `<span class="num opt" style="background:${c.color}99">tekrar</span>`
+      : c.step ? `<span class="num" style="background:${c.color}">${c.step}</span>`
+      : `<span class="num opt" style="background:#4a3f36;color:var(--mute)">alt.</span>`;
+    return `<button class="step" data-go="${c.id}">${num}<span style="flex:1;min-width:0">
+      <b>${esc(c.title)}</b>${c.alt ? `<span class="tag">${esc(c.alt)}</span>` : ""}
+      <p>${esc(c.note)}</p><div class="bar"><i style="width:${pct}%"></i></div>
+      <div class="meta">${s.fin}/${s.total || "?"} parça bitti · ${s.loaded} ses dosyası yüklü</div></span></button>`;
+  };
+  $("#app").innerHTML = `${resume}
+    <h2>Sıfırdan öğrenme sırası</h2>
+    ${COURSES.filter((c) => c.step).sort((a, b) => a.step - b.step).map(card).join("")}
+    <div class="note"><b>Nasıl ilerle:</b> Foundation'ı baştan sona dinle → Foundation Review ile pekiştir → Advanced → Advanced Review → Language Builder → Vocabulary. Michel'in kuralı: ezberleme, cevabı öğrencilerden <b>önce</b> sesli söylemeye çalış.</div>
+    <h2>Aynı içeriğin diğer baskıları</h2>
+    ${COURSES.filter((c) => !c.step).map(card).join("")}
+    <div class="note">Total Spanish = Foundation + Vocabulary (CD 1-2) · Masterclass = Language Builder · Start/Introductory = Foundation'ın ilk 2 saati. Elinde hangi CD'ler varsa onları yükle, ikinci kez yükleme.</div>
+    <h2>Depolama</h2><div class="note" id="storage">Hesaplanıyor…</div>`;
+  $("#app").querySelectorAll("[data-go]").forEach((b) => b.onclick = () => location.hash = "c/" + b.dataset.go);
+  const rb = $("#resumeBtn"); if (rb) rb.onclick = () => playAt(last.c, last.d, last.i, last.time, true);
+  if (navigator.storage && navigator.storage.estimate) navigator.storage.estimate().then((e) => {
+    $("#storage") && ($("#storage").innerHTML = `Kullanılan: <b>${(e.usage / 1e6).toFixed(0)} MB</b> / yaklaşık ${(e.quota / 1e9).toFixed(1)} GB. Ses dosyaları sadece bu telefonda saklanır.`);
+  }); else $("#storage").textContent = "Ses dosyaları sadece bu telefonda saklanır.";
+}
+
+function renderCourse(c) {
+  $("#hdr").innerHTML = `<button class="back" onclick="location.hash=''" aria-label="Geri">‹</button><h1>${esc(c.title)}</h1>`;
+  const discs = c.discs.map((d) => {
+    const tr = discTracks(c, d), names = loadedNames(c.id, d.id);
+    const need = d.auto ? "" : ` / ${d.tracks.length}`;
+    const rows = tr.length ? tr.map((t) => `<button class="trk ${t.file ? "" : "off"}" data-k="${t.key}" data-d="${d.id}" data-i="${t.i}">
+        <span class="n">${t.i + 1}</span><span class="t">${esc(t.title)}<span>${t.ref ? esc(t.ref) + " · " : ""}${t.file ? esc(t.file) : "ses dosyası yok"}</span></span>
+        <span class="st ${done.has(t.key) ? "done" : ""}"></span></button>`).join("")
+      : `<div class="empty">Bu CD'nin parça listesi kitapçıkta yok. Dosyaları yükleyince parçalar burada sıralanır.</div>`;
+    return `<section class="disc"><div class="disc-h"><b>${esc(d.label)}</b>
+        <span class="cnt">${names.length}${need} yüklü</span>
+        ${names.length ? `<button class="btn ghost" data-del="${d.id}">Sil</button>` : ""}
+        <button class="btn ${names.length ? "" : "pri"}" data-imp="${d.id}">${names.length ? "Değiştir" : "Ses yükle"}</button></div>
+        ${d.desc ? `<div class="desc">${esc(d.desc)}</div>` : ""}${rows}</section>`;
+  }).join("");
+  $("#app").innerHTML = `<div class="note" style="margin:0 0 14px">${esc(c.note)}<br><span style="color:var(--dim)">Kitapçık: ${esc(c.pdf)}</span></div>
+    ${discs}
+    <div class="note"><b>Ses yükleme:</b> Her CD'nin MP3'lerini telefonundaki Dosyalar uygulamasından seç (o CD'nin tüm parçalarını birlikte). Dosya adlarındaki numaraya göre sıralanıp 1, 2, 3… parçalara eşlenir — örn. <i>01.mp3, 02.mp3</i> ya da <i>Track 01</i>.</div>`;
+  const app = $("#app");
+  app.querySelectorAll("[data-imp]").forEach((b) => b.onclick = () => startImport(c.id, b.dataset.imp));
+  app.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => deleteDisc(c.id, b.dataset.del));
+  app.querySelectorAll(".trk").forEach((b) => b.onclick = () => {
+    if (b.classList.contains("off")) return toast("Önce bu CD'nin ses dosyalarını yükle");
+    playAt(c.id, b.dataset.d, +b.dataset.i, null, true);
+  });
+}
+
+/* ---------- içe aktarma ---------- */
+let importTarget = null;
+function startImport(cid, did) { importTarget = { cid, did }; $("#picker").value = ""; $("#picker").click(); }
+$("#picker").onchange = async (e) => {
+  const files = [...e.target.files]; if (!files.length || !importTarget) return;
+  const { cid, did } = importTarget;
+  files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
+  toast(`${files.length} dosya kaydediliyor…`, 4000);
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+  try {
+    const old = loadedNames(cid, did);
+    for (let i = files.length; i < old.length; i++) await delFile(trackKey(cid, did, i));
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      const blob = new Blob([await f.arrayBuffer()], { type: f.type || "audio/mpeg" });
+      await putFile(trackKey(cid, did, i), blob);
+    }
+    LS.set("names:" + discKey(cid, did), files.map((f) => f.name));
+    const d = course(cid).discs.find((x) => x.id === did);
+    const msg = !d.auto && files.length !== d.tracks.length
+      ? `Yüklendi. Dikkat: kitapçıkta ${d.tracks.length} parça var, sen ${files.length} dosya seçtin.`
+      : `${files.length} parça yüklendi ✓`;
+    toast(msg, 4000);
+  } catch (err) { toast("Kaydedilemedi: " + (err && err.message || err), 5000); }
+  render();
+};
+async function deleteDisc(cid, did) {
+  if (!confirm("Bu CD'nin ses dosyaları telefondan silinsin mi?")) return;
+  const n = loadedNames(cid, did).length;
+  for (let i = 0; i < n; i++) await delFile(trackKey(cid, did, i));
+  LS.set("names:" + discKey(cid, did), []);
+  if (cur && cur.c.id === cid && cur.d.id === did) { au.pause(); au.removeAttribute("src"); cur = null; $("#mini").classList.remove("on"); }
+  render();
+}
+
+/* ---------- çalar ---------- */
+const au = $("#au");
+let cur = null, curURL = null, rate = LS.get("rate", 1);
+au.playbackRate = rate;
+
+async function playAt(cid, did, i, startTime, autoplay) {
+  const c = course(cid), d = c.discs.find((x) => x.id === did), t = discTracks(c, d)[i];
+  if (!t || !t.file) return;
+  const blob = await getFile(t.key);
+  if (!blob) { toast("Ses dosyası bulunamadı, tekrar yükle"); return; }
+  if (curURL) URL.revokeObjectURL(curURL);
+  curURL = URL.createObjectURL(blob);
+  cur = { c, d, t };
+  au.src = curURL; au.playbackRate = rate;
+  const last = LS.get("last");
+  const resumeAt = startTime != null ? startTime : (last && last.c === cid && last.d === did && last.i === i ? last.time : 0);
+  au.addEventListener("loadedmetadata", function once() {
+    au.removeEventListener("loadedmetadata", once);
+    if (resumeAt && resumeAt < au.duration - 3) au.currentTime = resumeAt;
+  });
+  savePos(0);
+  if (autoplay) au.play().catch(() => {});
+  updateUI(); setMedia(); syncNowMarkers();
+}
+function step(dir) {
+  if (!cur) return;
+  const q = courseQueue(cur.c), idx = q.findIndex((x) => x.t.key === cur.t.key), n = q[idx + dir];
+  if (n) playAt(n.c.id, n.d.id, n.t.i, 0, true);
+  else if (dir > 0) { toast("Bu kursun yüklü son parçası bitti 🎉"); }
+}
+function prev() { if (au.currentTime > 5) au.currentTime = 0; else step(-1); }
+function toggle() { if (!cur) { const l = LS.get("last"); if (l) playAt(l.c, l.d, l.i, l.time, true); return; } au.paused ? au.play() : au.pause(); }
+function savePos(t) { if (cur) LS.set("last", { c: cur.c.id, d: cur.d.id, i: cur.t.i, time: t ?? au.currentTime }); }
+
+au.addEventListener("ended", () => { if (cur) { done.add(cur.t.key); saveDone(); } step(1); });
+au.addEventListener("play", updateUI); au.addEventListener("pause", () => { updateUI(); savePos(); });
+let lastSave = 0;
+au.addEventListener("timeupdate", () => {
+  const p = au.duration ? au.currentTime / au.duration : 0;
+  $("#miniProg").style.width = (p * 100) + "%";
+  if (!seeking) $("#seek").value = Math.round(p * 1000);
+  $("#tCur").textContent = fmt(au.currentTime); $("#tDur").textContent = fmt(au.duration);
+  if (Date.now() - lastSave > 4000) { lastSave = Date.now(); savePos(); }
+  if ("setPositionState" in (navigator.mediaSession || {}) && au.duration) {
+    try { navigator.mediaSession.setPositionState({ duration: au.duration, position: au.currentTime, playbackRate: au.playbackRate }); } catch {}
+  }
+});
+
+function updateUI() {
+  const on = !!cur; $("#mini").classList.toggle("on", on); if (!on) return;
+  const ic = au.paused ? ICON.play : ICON.pause;
+  $("#miniPP").innerHTML = ic; $("#play").innerHTML = ic.replace(/34/g, "54");
+  $("#miniInfo b").textContent = cur.t.title;
+  $("#miniInfo small").textContent = `${cur.c.short} · ${cur.d.label} · ${cur.t.i + 1}. parça`;
+  $("#cCourse").textContent = `${cur.c.short} · ${cur.d.label}`;
+  $("#cTitle").textContent = cur.t.title;
+  $("#cRef").textContent = `${cur.t.i + 1}. parça${cur.t.ref ? " · " + cur.t.ref : ""}`;
+  $("#markDone").textContent = done.has(cur.t.key) ? "✓ Bitti" : "Bitti say";
+  $("#markDone").style.color = done.has(cur.t.key) ? "var(--ok)" : "";
+}
+function syncNowMarkers() {
+  document.querySelectorAll(".trk.now").forEach((e) => e.classList.remove("now"));
+  if (cur) { const el = document.querySelector(`.trk[data-k="${CSS.escape(cur.t.key)}"]`); if (el) el.classList.add("now"); }
+}
+function setMedia() {
+  if (!("mediaSession" in navigator) || !cur) return;
+  const ms = navigator.mediaSession;
+  ms.metadata = new MediaMetadata({
+    title: `${cur.t.i + 1}. ${cur.t.title}`, artist: "Michel Thomas · İspanyolca", album: `${cur.c.short} – ${cur.d.label}`,
+    artwork: [{ src: "icon-512.png", sizes: "512x512", type: "image/png" }]
+  });
+  const h = { play: () => au.play(), pause: () => au.pause(), nexttrack: () => step(1), previoustrack: prev,
+    seekto: (e) => { if (e.seekTime != null) au.currentTime = e.seekTime; } };
+  for (const [k, f] of Object.entries(h)) { try { ms.setActionHandler(k, f); } catch {} }
+}
+
+/* kontroller */
+$("#miniPP").onclick = (e) => { e.stopPropagation(); toggle(); };
+$("#mini").onclick = () => $("#car").classList.add("on");
+$("#carClose").onclick = () => $("#car").classList.remove("on");
+$("#play").onclick = toggle; $("#next").onclick = () => step(1); $("#prev").onclick = prev;
+$("#prev").innerHTML = ICON.prev; $("#next").innerHTML = ICON.next;
+$("#back15").onclick = () => au.currentTime = Math.max(0, au.currentTime - 15);
+$("#fwd15").onclick = () => au.currentTime = Math.min(au.duration || 0, au.currentTime + 15);
+$("#markDone").onclick = () => { if (!cur) return; done.has(cur.t.key) ? done.delete(cur.t.key) : done.add(cur.t.key); saveDone(); updateUI(); };
+const SPEEDS = [0.8, 0.9, 1, 1.1, 1.25];
+const showRate = () => $("#spd").textContent = (Number.isInteger(rate) ? rate.toFixed(1) : String(rate)) + "×";
+$("#spd").onclick = () => { rate = SPEEDS[(SPEEDS.indexOf(rate) + 1) % SPEEDS.length] || 1; au.playbackRate = rate; LS.set("rate", rate); showRate(); };
+showRate();
+let seeking = false;
+$("#seek").oninput = () => { seeking = true; if (au.duration) $("#tCur").textContent = fmt($("#seek").value / 1000 * au.duration); };
+$("#seek").onchange = () => { if (au.duration) au.currentTime = $("#seek").value / 1000 * au.duration; seeking = false; };
+document.addEventListener("visibilitychange", () => { if (document.hidden) savePos(); });
+
+/* başlat */
+window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
+openDB().then(render).catch(() => { render(); toast("Tarayıcı depolaması açılamadı (gizli sekme olabilir)"); });
+if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
+</script>
+</body>
+</html>
