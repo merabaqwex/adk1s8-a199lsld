@@ -1,7 +1,7 @@
 # Michel Thomas · İspanyolca — Dinleme Uygulaması
 
 iPhone'da ana ekrana eklenen, arabada dinlemek için yapılmış bir ses çalar.
-Kurslar kitapçıklardaki **CD → parça** düzenine göre bölünmüştür; her parçanın konusu Türkçe yazılıdır.
+Kurslar Michel Thomas kitapçıklarındaki konu sırasını izler; cümleler bu uygulama için yazılmıştır.
 
 ## Öğrenme sırası (sıfırdan)
 1. **Foundation** (8 CD) → isteğe bağlı **Foundation Review**
@@ -19,15 +19,12 @@ Total Spanish, Start Spanish, Introductory ve Masterclass aynı içeriğin farkl
 
 ## iPhone'a kurma
 1. Adresi **Safari**'de aç → Paylaş → **Ana Ekrana Ekle**.
-2. Uygulamayı ana ekrandan aç (ses dosyaları bu uygulamaya kaydedilir).
+2. Uygulamayı ana ekrandan aç.
 
-## Ses dosyalarını yükleme
-- CD'lerin MP3'lerini iPhone'daki **Dosyalar** uygulamasına (iCloud Drive veya "iPhone'umda") koy.
-- Uygulamada kursu aç → ilgili CD'de **Ses yükle** → o CD'nin tüm parçalarını seç.
-- Dosyalar adlarındaki numaraya göre sıralanıp 1, 2, 3… parçalara eşlenir.
-- Ses dosyaları sadece telefonda saklanır; GitHub'a yükleme.
+## Seslendirme
+Ses dosyası gerekmez: cümleleri iPhone'un kendi İspanyolca ve İngilizce sesleri okur (her cümle 2 kez). Ayarlardan düzen, hız ve duraklama değiştirilebilir.
 
 ## Arabada
 - Parça bitince otomatik sonrakine geçer, kaldığın saniyeyi hatırlar.
-- Kilit ekranı / CarPlay / Bluetooth direksiyon tuşlarıyla önceki-sonraki parça çalışır.
+- Uygulama ekranda açık kalmalı (iPhone kilitlenince seslendirme durur).
 - Alttaki çubuğa dokun → büyük düğmeli araba ekranı (−15 sn, hız, "bitti" işareti).

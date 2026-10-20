@@ -1,407 +1,1667 @@
 <!doctype html>
-<html lang="tr">
-<head>
-<meta charset="utf-8">
+<html lang="tr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Michel Thomas · İspanyolca</title>
-<meta name="theme-color" content="#14110f">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#111315">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="MT Español">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Español">
+<link rel="apple-touch-icon" href="icon-180.png"><link rel="manifest" href="manifest.webmanifest">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<title>Español en el Coche</title>
+</head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap">
 <style>
+/* Layout: tek sütun "yol haritası" → kurs → büyük düğmeli araba ekranı. Gece sürüşü için koyu, tek görünüm. */
 :root{
-  --bg:#14110f; --bg2:#1d1916; --card:#241f1b; --line:#3a322b;
-  --ink:#f4ede4; --mute:#a99d90; --dim:#6f655b;
-  --red:#e8553e; --gold:#e8b021; --ok:#4cbf7f;
-  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+  --bg:#111315; --surface:#1a1d20; --surface2:#22262a; --line:#30353a;
+  --ink:#f2efe9; --mute:#a3a7ab; --dim:#6c7176;
+  --rojo:#e4573d; --oro:#efb72f; --verde:#4fbf84;
+  --display:"Bricolage Grotesque", ui-rounded, -apple-system, "Segoe UI", sans-serif;
+  --body:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  color-scheme:dark;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--ink);
-  font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
-a{color:inherit}
-header{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 70%,transparent);
-  padding:calc(var(--safe-t) + 14px) 16px 10px;display:flex;align-items:center;gap:12px}
-header h1{font-size:20px;margin:0;letter-spacing:-.01em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-header .back{width:40px;height:40px;border-radius:12px;background:var(--card);display:grid;place-items:center;font-size:22px}
-.flag{display:inline-block;width:22px;height:15px;border-radius:3px;vertical-align:-2px;margin-right:8px;
-  background:linear-gradient(var(--red) 0 25%,var(--gold) 25% 75%,var(--red) 75%)}
-main{padding:0 16px calc(130px + var(--safe-b));max-width:720px;margin:0 auto}
-h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:26px 4px 10px;font-weight:600}
-.resume{display:flex;align-items:center;gap:14px;width:100%;text-align:left;
-  background:linear-gradient(135deg,#3a1f17,#2b1d12);border:1px solid #5a3424;border-radius:20px;padding:16px;margin-top:4px}
-.resume .big{width:56px;height:56px;border-radius:50%;background:var(--red);display:grid;place-items:center;flex:none}
-.resume small{color:#e9b9a6;display:block;font-size:13px}
-.resume b{display:block;font-size:17px;margin-top:2px}
-.step{display:flex;gap:14px;align-items:stretch;width:100%;text-align:left;background:var(--card);
-  border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:10px}
-.step .num{width:48px;flex:none;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:20px;color:#14110f}
-.step .num.opt{font-size:12px;font-weight:700}
-.step b{font-size:17px}
-.step p{margin:3px 0 8px;color:var(--mute);font-size:14px}
-.bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--ok);border-radius:3px}
-.meta{font-size:12px;color:var(--dim);margin-top:6px}
-.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;background:#2f2822;color:var(--mute);margin-left:6px;vertical-align:2px}
-.disc{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:14px;overflow:hidden}
-.disc-h{display:flex;align-items:center;gap:10px;padding:14px 14px 12px}
-.disc-h b{font-size:18px;flex:1}
-.disc-h .cnt{font-size:12px;color:var(--mute)}
-.btn{padding:9px 13px;border-radius:12px;background:#2f2822;font-size:14px;font-weight:600;white-space:nowrap}
-.btn.pri{background:var(--red);color:#fff}
-.btn.ghost{background:none;color:var(--dim);padding:9px 6px}
-.desc{padding:0 14px 12px;color:var(--mute);font-size:13px}
-.trk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-top:1px solid var(--line);min-height:58px}
-.trk .n{width:30px;flex:none;color:var(--dim);font-variant-numeric:tabular-nums;font-weight:700;text-align:center}
+html,body{background:var(--bg);color:var(--ink)}
+body{font:16px/1.45 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 calc(120px + env(safe-area-inset-bottom,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;padding:0}
+button:focus-visible,select:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
+.wrap{max-width:680px;margin:0 auto}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:12px;padding-block:14px 10px}
+header h1{font:800 22px/1.1 var(--display);margin:0;flex:1;min-width:0;letter-spacing:-.01em;text-wrap:balance}
+.back{width:42px;height:42px;border-radius:12px;background:var(--surface2);font-size:24px;display:grid;place-items:center}
+.stripe{width:26px;height:18px;border-radius:4px;flex:none;background:linear-gradient(var(--rojo) 0 25%,var(--oro) 25% 75%,var(--rojo) 75%)}
+h2{font:700 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:26px 2px 10px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.resume{display:flex;gap:14px;align-items:center;text-align:left;padding:16px;border-radius:20px;background:#2a1a15;border:1px solid #5a2e22}
+.resume .ic{width:54px;height:54px;border-radius:50%;background:var(--rojo);display:grid;place-items:center;flex:none}
+.resume small{display:block;color:#e8b3a3;font-size:13px}
+.resume b{display:block;font:700 18px/1.25 var(--display);margin-top:2px}
+.course{display:flex;gap:14px;text-align:left;padding:14px;border-radius:18px;background:var(--surface);border:1px solid var(--line)}
+.course .n{width:46px;flex:none;border-radius:13px;display:grid;place-items:center;font:800 24px/1 var(--display);color:#111315}
+.course .txt{flex:1;min-width:0}
+.course b{font:700 19px/1.2 var(--display)}
+.course p{margin:4px 0 10px;color:var(--mute);font-size:14px}
+.bar{height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--verde)}
+.meta{margin-top:6px;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+.note{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:12px 14px;color:var(--mute);font-size:14px}
+.note b{color:var(--ink)}
+.settings{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:6px 14px}
+.set{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.set:first-child{border-top:0}
+.set label{flex:1;font-size:15px}
+.set label small{display:block;color:var(--dim);font-size:12px}
+.set select{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;max-width:56%}
+.test{padding:9px 12px;border-radius:10px;background:var(--surface2);font-weight:600;font-size:14px}
+.disc{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.disc-h{display:flex;align-items:center;gap:10px;padding:14px}
+.disc-h b{font:700 18px/1 var(--display);flex:1}
+.disc-h span{font-size:12px;color:var(--mute)}
+.playall{padding:8px 12px;border-radius:11px;background:var(--rojo);color:#fff;font-weight:700;font-size:14px}
+.trk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-top:1px solid var(--line);min-height:60px}
+.trk .num{width:28px;flex:none;text-align:center;color:var(--dim);font-weight:700;font-variant-numeric:tabular-nums}
 .trk .t{flex:1;min-width:0}
 .trk .t span{display:block;font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.trk.off{opacity:.42}
-.trk.now{background:#33231b}
-.trk.now .n{color:var(--red)}
-.trk .st{width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--line)}
-.trk .st.done{background:var(--ok);border-color:var(--ok);display:grid;place-items:center;color:#14110f;font-size:13px;font-weight:900}
-.trk .st.done::after{content:"✓"}
-.note{background:var(--bg2);border:1px dashed var(--line);border-radius:14px;padding:12px 14px;color:var(--mute);font-size:14px;margin-top:10px}
-.note b{color:var(--ink)}
-.empty{padding:14px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
+.trk .ck{width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:900;color:#111315}
+.trk .ck.on{background:var(--verde);border-color:var(--verde)}
+.trk.now{background:#2a1d18}.trk.now .num{color:var(--rojo)}
 
-/* mini player */
-#mini{position:fixed;left:10px;right:10px;bottom:calc(10px + var(--safe-b));z-index:10;max-width:700px;margin:0 auto;
-  background:#2a221d;border:1px solid #4a3a30;border-radius:20px;display:none;align-items:center;gap:10px;padding:10px 10px 10px 14px;
-  box-shadow:0 10px 30px #0008}
-#mini.on{display:flex}
-#mini .info{flex:1;min-width:0}
-#mini .info b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#mini .info small{color:var(--mute);font-size:12px}
-#mini .pp{width:50px;height:50px;border-radius:50%;background:var(--red);display:grid;place-items:center;flex:none}
-#mini .prog{position:absolute;left:18px;right:18px;bottom:4px;height:3px;background:#0004;border-radius:2px;overflow:hidden}
-#mini .prog i{display:block;height:100%;width:0;background:var(--gold)}
+#mini{position:fixed;left:0;right:0;bottom:0;z-index:12;padding:0 max(10px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+#mini .in{max-width:680px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:10px 10px 10px 14px;border-radius:20px;background:#262b2f;border:1px solid #3c4247;box-shadow:0 10px 30px #000a;position:relative;overflow:hidden}
+#mini .info{flex:1;min-width:0;text-align:left}
+#mini b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#mini small{color:var(--mute);font-size:12px}
+.pp{width:52px;height:52px;border-radius:50%;background:var(--rojo);display:grid;place-items:center;flex:none;color:#fff}
+#mini .prog{position:absolute;left:0;bottom:0;height:3px;background:var(--oro);width:0;transition:width .3s}
 
-/* car mode */
-#car{position:fixed;inset:0;z-index:20;background:#0e0c0b;display:none;flex-direction:column;
-  padding:calc(var(--safe-t) + 12px) 18px calc(var(--safe-b) + 18px)}
-#car.on{display:flex}
-#car .top{display:flex;justify-content:space-between;align-items:center}
-#car .close{width:48px;height:48px;border-radius:14px;background:var(--card);font-size:24px}
-#car .where{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:10px 0}
-#car .where small{color:var(--mute);font-size:16px}
-#car .where b{font-size:26px;line-height:1.25;margin:10px 0 4px;letter-spacing:-.01em}
-#car .where span{color:var(--dim);font-size:14px}
-#car input[type=range]{width:100%;accent-color:var(--gold);height:30px}
-#car .times{display:flex;justify-content:space-between;color:var(--mute);font-variant-numeric:tabular-nums;font-size:14px}
-#car .ctrls{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:12px;margin-top:14px;align-items:center}
-#car .ctrls button{height:96px;border-radius:24px;background:var(--card);display:grid;place-items:center}
-#car .ctrls .play{height:130px;background:var(--red)}
-#car .row2{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-#car .row2 button{height:64px;border-radius:18px;background:var(--bg2);font-weight:700;font-size:18px}
-svg{display:block}
-.toast{position:fixed;left:50%;top:calc(var(--safe-t) + 12px);transform:translateX(-50%);background:#f4ede4;color:#14110f;
-  padding:10px 16px;border-radius:12px;font-weight:600;z-index:30;font-size:14px;max-width:90vw;text-align:center}
+#car{position:fixed;inset:0;z-index:20;background:#0b0c0d;display:flex;flex-direction:column;
+  padding:calc(env(safe-area-inset-top,0px) + 12px) max(18px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 16px) max(18px,env(safe-area-inset-left,0px))}
+#car .top{display:flex;align-items:center;gap:10px}
+#car .top .where{flex:1;min-width:0;color:var(--mute);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#car .close{width:48px;height:48px;border-radius:14px;background:var(--surface2);font-size:26px;flex:none}
+#car .stage{flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;text-align:center;min-height:0}
+#car .lesson{color:var(--oro);font-weight:700;font-size:15px}
+#car .es{font:800 clamp(30px,8.5vw,46px)/1.15 var(--display);letter-spacing:-.01em;text-wrap:balance;transition:color .2s}
+#car .en{font-size:clamp(19px,5vw,24px);color:var(--mute);text-wrap:balance;transition:color .2s}
+#car .es.speaking{color:var(--oro)} #car .en.speaking{color:var(--ink)}
+#car .count{color:var(--dim);font-variant-numeric:tabular-nums;font-size:14px}
+.dots{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.dots i.d{background:var(--verde)} .dots i.c{background:var(--oro)}
+#car .ctrls{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:12px;align-items:center}
+#car .ctrls button{height:100px;border-radius:24px;background:var(--surface2);display:grid;place-items:center;color:var(--ink)}
+#car .ctrls button span{display:block;font-size:12px;color:var(--mute);margin-top:4px}
+#car .ctrls .big{height:132px;background:var(--rojo);color:#fff}
+#car .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+#car .row2 button{height:60px;border-radius:18px;background:var(--surface);font-weight:700;font-size:16px}
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);transform:translateX(-50%);z-index:40;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;max-width:90vw;text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-</head>
-<body>
-<header id="hdr"></header>
-<main id="app"></main>
 
-<div id="mini">
-  <div class="info" id="miniInfo"><b></b><small></small></div>
-  <button class="pp" id="miniPP" aria-label="Oynat/Duraklat"></button>
-  <div class="prog"><i id="miniProg"></i></div>
+<div class="wrap">
+  <header id="hdr"></header>
+  <main id="app"></main>
 </div>
 
-<div id="car">
-  <div class="top">
-    <button class="close" id="carClose" aria-label="Kapat">⌄</button>
-    <button class="btn" id="spd">1.0×</button>
+<div id="mini" hidden><button class="in" id="miniOpen"><span class="info"><b id="miniT"></b><small id="miniS"></small></span><span class="pp" id="miniPP" role="button" aria-label="Oynat veya duraklat"></span><span class="prog" id="miniProg"></span></button></div>
+
+<div id="car" hidden>
+  <div class="top"><button class="close" id="carClose" aria-label="Kapat">⌄</button><div class="where" id="cWhere"></div></div>
+  <div class="stage">
+    <div class="lesson" id="cLesson"></div>
+    <div class="es" id="cEs"></div>
+    <div class="en" id="cEn"></div>
+    <div class="dots" id="cDots"></div>
   </div>
-  <div class="where"><small id="cCourse"></small><b id="cTitle"></b><span id="cRef"></span></div>
-  <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Konum">
-  <div class="times"><span id="tCur">0:00</span><span id="tDur">0:00</span></div>
   <div class="ctrls">
-    <button id="prev" aria-label="Önceki parça"></button>
-    <button id="play" class="play" aria-label="Oynat/Duraklat"></button>
-    <button id="next" aria-label="Sonraki parça"></button>
+    <button id="bPrev" aria-label="Önceki cümle"></button>
+    <button id="bPlay" class="big" aria-label="Oynat veya duraklat"></button>
+    <button id="bNext" aria-label="Sonraki cümle"></button>
   </div>
   <div class="row2">
-    <button id="back15">−15 sn</button>
-    <button id="markDone">✓ Bitti</button>
-    <button id="fwd15">+15 sn</button>
+    <button id="bPrevT">⏮ Önceki bölüm</button>
+    <button id="bNextT">Sonraki bölüm ⏭</button>
   </div>
 </div>
 
-<input type="file" id="picker" multiple accept="audio/*,.mp3,.m4a,.aac,.wav" hidden>
-<audio id="au" preload="auto" playsinline></audio>
+<script>
+const RAW = `@ foundation | Foundation | 1 | Temel kurs: sıfırdan konuşmaya. Michel Thomas Foundation sırasını izler.
+# CD 1
+## -ible / -able kelimeleri
+posible = possible
+Es posible. = It is possible.
+Es terrible. = It is terrible.
+Es probable. = It is probable.
+Es aceptable. = It is acceptable.
+Es increíble. = It is incredible.
+## para mí, para usted, no es
+Es para mí. = It is for me.
+Es para usted. = It is for you.
+No es para usted. = It is not for you.
+No es posible para mí. = It is not possible for me.
+No es para mí, es para usted. = It is not for me, it is for you.
+Es aceptable para usted. = It is acceptable for you.
+## Soru tonlaması, ¿por qué?, así
+¿Es posible? = Is it possible?
+¿No es posible? = Isn't it possible?
+¿Por qué? = Why?
+porque = because
+Es así. = It is like that.
+No es así. = It is not like that.
+¿Por qué no es posible así? = Why isn't it possible like that?
+Lo siento, pero no es así. = I'm sorry, but it's not like that.
+## -ente / -ante, muy bueno
+importante = important
+diferente = different
+Es muy importante. = It is very important.
+Es muy bueno. = It is very good.
+No es muy diferente así. = It is not very different that way.
+Es un restaurante muy bueno. = It is a very good restaurant.
+## tengo, quiero, necesito
+tengo = I have
+Lo tengo. = I have it.
+No lo quiero. = I don't want it.
+Lo necesito ahora. = I need it now.
+Lo quiero pero no lo necesito. = I want it but I don't need it.
+No lo tengo ahora. = I don't have it now.
+## tiene, ¿qué?
+¿Qué tiene? = What do you have?
+¿Lo tiene? = Do you have it?
+No lo tiene. = You don't have it.
+¿Qué tiene para mí? = What do you have for me?
+Es urgente. Lo necesito ahora. = It's urgent. I need it now.
+¿Por qué no lo tiene para mí? = Why don't you have it for me?
+## quiere, saber
+¿Qué quiere? = What do you want?
+¿Lo quiere así? = Do you want it like that?
+Quiero saber. = I want to know.
+No quiero saber. = I don't want to know.
+Quiero saber por qué. = I want to know why.
+¿Por qué no lo quiere? = Why don't you want it?
+## puedo, hacer, comer
+puedo = I can
+¿Puede hacerlo? = Can you do it?
+Quiero comer algo. = I want to eat something.
+Tengo hambre. = I am hungry.
+¿Tiene hambre? = Are you hungry?
+¿Qué quiere comer ahora? = What do you want to eat now?
+## -ario kelimeleri, y
+necesario = necessary
+No es necesario. = It is not necessary.
+Al contrario. = On the contrary.
+Es necesario y es importante. = It is necessary and it is important.
+No es necesario para mí ahora. = It is not necessary for me now.
+## ver, verlo
+ver = to see
+Quiero verlo. = I want to see it.
+No puedo verlo. = I can't see it.
+¿Puede verlo? = Can you see it?
+¿Quiere hacerlo ahora? = Do you want to do it now?
+No puedo hacerlo así. = I can't do it that way.
+## -encia / -ancia, esta noche
+la diferencia = the difference
+una preferencia = a preference
+¿Qué diferencia? = What difference?
+¿Tiene una preferencia? = Do you have a preference?
+Es para esta noche. = It is for tonight.
+No es importante esta noche. = It's not important tonight.
+## ¿dónde?, cenar, -ción
+¿Dónde? = Where?
+¿Dónde quiere cenar? = Where do you want to have dinner?
+una reservación = a reservation
+la situación = the situation
+¿Tiene una reservación? = Do you have a reservation?
+¿Dónde quiere comer esta noche? = Where do you want to eat tonight?
+# CD 2
+## -ación, de, tipo
+la confirmación = the confirmation
+la información = the information
+¿Qué tipo de restaurante? = What kind of restaurant?
+la confirmación de la reservación = the confirmation of the reservation
+¿Qué tipo de información quiere? = What kind of information do you want?
+## traducción, por favor, hoy, dar
+Necesito una traducción. = I need a translation.
+¿Puede hacerlo para mí? = Can you do it for me?
+Por favor. = Please.
+¿Puede hacerlo hoy, por favor? = Can you do it today, please?
+¿Puede dar una explicación? = Can you give an explanation?
+## İsimden fiil: -ar
+formar = to form
+confirmar = to confirm
+hablar = to speak
+salir = to leave
+Quiero confirmar la reservación. = I want to confirm the reservation.
+Quiero hablar. = I want to speak.
+## aquí; verle, verlos, verme
+aquí = here
+Quiero verle. = I want to see you.
+Quiero verlos. = I want to see them.
+¿Puede verme? = Can you see me?
+¿Puede hacerlo aquí? = Can you do it here?
+## comprender, decir, comprar
+¿Puede comprenderme? = Can you understand me?
+¿Puede decirme? = Can you tell me?
+Quiero comprar algo. = I want to buy something.
+¿Por qué no quiere comprarlo? = Why don't you want to buy it?
+¿Por qué no puede decirme ahora? = Why can't you tell me now?
+## caro, tengo que, salir, pronto
+Es muy caro. = It is very expensive.
+Tengo que hacerlo. = I have to do it.
+Tengo que salir pronto. = I have to leave soon.
+Tiene que comprarlo. = You have to buy it.
+¿Cuándo tiene que salir? = When do you have to leave?
+## -ico; la situación política
+lógico = logical
+práctico = practical
+No es lógico pero es práctico. = It's not logical but it's practical.
+la situación económica = the economic situation
+¿Qué piensa de la situación política? = What do you think of the political situation?
+## ¿cuánto?, si, estoy
+¿Cuánto es? = How much is it?
+si no es muy caro = if it is not very expensive
+Estoy ocupado. = I am busy.
+Estoy cansada. = I am tired.
+No estoy muy ocupado hoy. = I am not very busy today.
+## está, estar, ¿cómo está?
+¿Cómo está? = How are you?
+¿Dónde está? = Where is it?
+¿Está ocupada ahora? = Are you busy now?
+Buenos días. = Good morning.
+esta casa = this house
+## voy a, más tarde
+Voy a comer. = I am going to eat.
+Voy a comprarlo. = I am going to buy it.
+Es muy tarde. = It is very late.
+Voy a estar aquí más tarde. = I am going to be here later.
+No voy a hacerlo porque es caro. = I'm not going to do it because it's expensive.
+# CD 3
+## llamar, ¿a qué hora?, va a
+Voy a llamarle más tarde. = I am going to call you later.
+¿A qué hora? = At what time?
+¿A qué hora va a llamarme? = What time are you going to call me?
+¿Puede llamarme mañana? = Can you call me tomorrow?
+¿Dónde va a estar? = Where are you going to be?
+## él, ella, usted
+Va a hacerlo. = He is going to do it.
+Ella va a estar aquí pronto. = She is going to be here soon.
+¿Qué quiere él? = What does he want?
+¿Dónde está ella? = Where is she?
+¿Qué tiene usted? = What do you have?
+## listo
+Estoy listo. = I am ready.
+¿Está lista? = Are you ready?
+¿A qué hora va a estar listo? = What time is it going to be ready?
+Quiero saber cuándo va a estar listo. = I want to know when it will be ready.
+## todo, nada, mañana
+Todo está listo. = Everything is ready.
+Nada está listo. = Nothing is ready.
+mañana = tomorrow
+Todo va a estar listo mañana. = Everything will be ready tomorrow.
+No tengo nada. = I have nothing.
+## ser ve estar
+Es posible. = It is possible.
+Está listo. = It is ready.
+Soy profesor. = I am a teacher.
+No sé. = I don't know.
+No sé dónde está. = I don't know where it is.
+## ser/estar örnekleri
+Pablo está enfermo hoy. = Pablo is sick today.
+Ella está bien vestida hoy. = She is well dressed today.
+Soy ingeniero. = I am an engineer.
+Él es listo. = He is clever.
+Ella está lista. = She is ready.
+## confirmar, preparar, aceptar, mucho
+¿Puede preparar la cena? = Can you prepare dinner?
+Quiero aceptar la condición. = I want to accept the condition.
+Muchas gracias. = Thank you very much.
+Lo siento, no puedo aceptarlo. = I'm sorry, I can't accept it.
+## Fiil, sıfat, isim
+la situación = the situation
+importante = important
+preparar = to prepare
+aceptar = to accept
+entender = to understand
+## venir, conmigo
+¿Puede venir conmigo? = Can you come with me?
+con ella = with her
+con usted = with you
+¿Puede hablar español conmigo? = Can you speak Spanish with me?
+¿Puede venir a verlo esta noche? = Can you come to see it tonight?
+## ir, tengo que ir
+ir = to go
+Quiero ir a verlo. = I want to go to see it.
+Tengo que ir. = I have to go.
+Tengo que hablar con usted. = I have to talk with you.
+No puedo ir hoy porque estoy ocupado. = I can't go today because I'm busy.
+# CD 4
+## encontrar
+No puedo encontrarlo. = I can't find it.
+¿Dónde está? No sé. = Where is it? I don't know.
+¿Puede decirme dónde está? = Can you tell me where it is?
+¿Puede ayudarme a encontrarlo? = Can you help me find it?
+## compro, vendo, comprendo
+Lo compro. = I'm buying it.
+No lo vendo. = I'm not selling it.
+Lo comprendo muy bien. = I understand it very well.
+¿Me comprende? = Do you understand me?
+¿Por qué no lo comprende? = Why don't you understand it?
+## escribir, todos los días
+Escribo. = I am writing.
+Escribo todos los días. = I write every day.
+¿Por qué no lo vende? = Why don't you sell it?
+Lo vende. = He is selling it.
+## me gusta, le gusta
+Me gusta. = I like it.
+Me gusta mucho. = I like it a lot.
+No me gusta hacerlo. = I don't like to do it.
+¿Le gusta? = Do you like it?
+Me gusta escribir. = I like to write.
+## sabe, hace, sale, -iendo
+¿Sabe dónde está? = Do you know where it is?
+¿Qué hace hoy? = What are you doing today?
+¿A qué hora sale? = What time are you leaving?
+¿Qué está haciendo? = What are you doing right now?
+Estoy saliendo. = I am leaving right now.
+## dice, lo que, querer decir
+¿Qué dice? = What are you saying?
+No comprendo lo que dice. = I don't understand what you are saying.
+No es lo que quiero. = It's not what I want.
+¿Qué quiere decir? = What do you mean?
+No es lo que quiero decir. = That's not what I mean.
+## İki ray: -ar ve -er/-ir
+hablo = I speak
+Lo preparo. = I'm preparing it.
+Lo acepto. = I accept it.
+¿Habla inglés? = Do you speak English?
+Escribe. = He writes.
+## quién, nadie, todo el mundo
+¿Quién habla español? = Who speaks Spanish?
+Nadie habla inglés aquí. = Nobody speaks English here.
+Todo el mundo lo sabe. = Everybody knows it.
+¿Por qué no habla español conmigo? = Why don't you speak Spanish with me?
+## Onlar: -n
+Hablan. = They speak.
+Comprenden. = They understand.
+Lo hacen. = They are doing it.
+Lo compran. = They are buying it.
+No lo venden. = They are not selling it.
+## Siz (çoğul): -n
+¿Por qué no lo venden? = Why don't you all sell it?
+¿Por qué no lo hacen? = Why don't you all do it?
+¿Hablan español? = Do you all speak Spanish?
+¿Qué quieren? = What do you all want?
+# CD 5
+## Şimdiki zaman tekrarı
+Comprendo. = I understand.
+No comprendo. = I don't understand.
+Quiere. = He wants.
+Puedo. = I can.
+Comprenden. = They understand.
+¿No me comprende? = Don't you understand me?
+## voy, estoy, soy, doy, sé
+voy = I go
+estoy = I am (state)
+soy = I am (identity)
+doy = I give
+sé = I know
+## venden, compran
+No lo compran. = They are not buying it.
+¿Por qué no lo compran? = Why don't you all buy it?
+Lo venden hoy. = They are selling it today.
+## tú; emir kipi
+¿Hablas inglés? = Do you speak English?
+¿Por qué no hablas conmigo? = Why don't you talk with me?
+¡Hable español conmigo! = Speak Spanish with me!
+¿Qué quieres? = What do you want?
+## este, ese, esto
+este libro = this book
+esa mesa = that table
+Quiero ver esto. = I want to see this.
+¡Compre ese libro! = Buy that book!
+¡No lo compre! = Don't buy it!
+## Olumsuz emir
+¡No lo venda! = Don't sell it!
+¡No lo vendas! = Don't sell it! (to a friend)
+¡No lo vendan! = Don't sell it! (to several people)
+No lo compre, no es bueno. = Don't buy it, it's not good.
+## Olumlu emir: zamir sona
+¡Cómprelo! = Buy it!
+¡Tómelo! = Take it!
+¡Cómalo! Es delicioso. = Eat it! It's delicious.
+¡No lo tome! = Don't take it!
+## Biz: -mos
+Hablamos. = We speak.
+Comemos. = We eat.
+Salimos pronto. = We are leaving soon.
+Lo hacemos así. = We do it like this.
+Tenemos tiempo. = We have time.
+## vamos; go-go fiiller
+Vamos a salir. = We are going to leave.
+¿A qué hora vamos a llegar? = What time are we going to arrive?
+Vengo. = I am coming.
+Salgo ahora. = I'm leaving now.
+Lo pongo aquí. = I'm putting it here.
+Supongo. = I suppose.
+## hago, digo, traigo
+Lo hago. = I'm doing it.
+Le digo. = I'm telling you.
+Lo traigo. = I'm bringing it.
+¿Dónde lo pone? = Where are you putting it?
+Lo ponemos aquí. = We are putting it here.
+## ga-ga emir
+¡Venga conmigo! = Come with me!
+¡No salga! = Don't leave!
+¡No lo ponga aquí! = Don't put it here!
+¡Póngalo allí! = Put it there!
+# CD 6
+## Tráigalo, hágalo, dígame
+¡Tráigalo! = Bring it!
+¡Hágalo! = Do it!
+¡Dígame! = Tell me!
+¡No me diga! = You don't say!
+¡Llámeme más tarde! = Call me later!
+¡Llámame! = Call me! (to a friend)
+## e → ie: tener, venir
+Tienen. = They have.
+Viene mañana. = He is coming tomorrow.
+Vienen. = They are coming.
+¿A qué hora comienza? = What time does it start?
+Comienzo ahora. = I'm starting now.
+## empezar, pensar, entender
+Empieza a las ocho. = It starts at eight.
+¿Qué piensa? = What do you think?
+Pienso salir pronto. = I plan to leave soon.
+No lo entiendo. = I don't understand it.
+¿Me entiendes? = Do you understand me?
+## o → ue: poder, volver
+Pueden. = They can.
+No lo encuentro. = I can't find it.
+Recuerdo. = I remember.
+Vuelvo pronto. = I'll be back soon.
+¿A qué hora vuelve? = What time are you coming back?
+## levantarse
+Me levanto. = I get up.
+Nos levantamos temprano. = We get up early.
+¿A qué hora te levantas? = What time do you get up?
+Tengo que levantarme. = I have to get up.
+Se levanta tarde. = He gets up late.
+## quedarse
+Me quedo. = I'm staying.
+No sé cuánto tiempo me quedo. = I don't know how long I'm staying.
+Nos quedamos unos días. = We're staying a few days.
+el problema = the problem
+la mano = the hand
+## hay, gente, todavía
+Hay mucha gente aquí. = There are many people here.
+No hay problema. = No problem.
+Todavía no sé. = I don't know yet.
+un poco más tarde = a little later
+## nos vemos
+Nos vemos mañana. = See you tomorrow.
+¿A qué hora nos vemos? = What time shall we meet?
+Le llamo mañana. = I'll call you tomorrow.
+Lo veo. = I see it.
+## Gelecek zaman: -ré
+Hablaré con él. = I will speak with him.
+Lo compraré. = I will buy it.
+Comeré más tarde. = I will eat later.
+Lo tomaremos. = We will take it.
+Comenzaremos mañana. = We will start tomorrow.
+## esperar, me quedaré
+Esperaré. = I will wait.
+Esperaremos aquí. = We will wait here.
+Me quedaré en casa. = I will stay at home.
+Voy a quedarme. = I am going to stay.
+# CD 7
+## voy a / vamos a / van a
+Vamos a comprarlo. = We are going to buy it.
+Van a llamarme más tarde. = They are going to call me later.
+¿A qué hora vas a llamarme? = What time are you going to call me?
+Vamos a llamarle. = We are going to call you.
+## quedarse pratiği
+Se quedan. = They are staying.
+¿Cuánto tiempo va a quedarse? = How long are you going to stay?
+Todavía no sé cuánto tiempo vamos a quedarnos. = I still don't know how long we'll stay.
+Nos quedaremos. = We will stay.
+## Gelecek: -rá, -rán
+Lo comprará. = He will buy it.
+No lo comprarán. = They won't buy it.
+Estaremos aquí mañana. = We will be here tomorrow.
+No será posible. = It won't be possible.
+Iré a verlo. = I will go to see it.
+## tendré, saldré, haré, diré
+Lo tendré mañana. = I will have it tomorrow.
+Saldremos pronto. = We will leave soon.
+Lo haré. = I will do it.
+Te diré más tarde. = I'll tell you later.
+¿Cuándo me dirá? = When will you tell me?
+## Koşul: -ría
+Sería necesario. = It would be necessary.
+No sería posible así. = It wouldn't be possible like that.
+Lo haría. = I would do it.
+No lo haría así. = I wouldn't do it that way.
+Él no saldría. = He wouldn't leave.
+## me gustaría, mandar
+Me gustaría verle. = I would like to see you.
+Nos gusta. = We like it.
+Me lo manda. = He sends it to me.
+Va a mandármelo mañana. = He's going to send it to me tomorrow.
+## se lo, mandárselo
+Te lo mando. = I'm sending it to you.
+Se lo mando. = I'm sending it to you (formal).
+Voy a mandárselo. = I'm going to send it to him.
+¿Puede mandármelo? = Can you send it to me?
+## quisiera
+Quisiera verlo. = I would like to see it.
+Quisiera un café. = I would like a coffee.
+No será necesario. = It won't be necessary.
+No sería necesario. = It wouldn't be necessary.
+## Geçmiş: he + -ado / -ido
+He hablado. = I have spoken.
+He comido. = I have eaten.
+Hemos vivido aquí. = We have lived here.
+Ha salido. = He has left.
+## he comprado, hecho, dicho
+He comprado algo. = I have bought something.
+Lo hemos comprado. = We have bought it.
+Lo he hecho. = I have done it.
+Me ha dicho. = He has told me.
+¿Dónde lo ha comprado? = Where have you bought it?
+# CD 8
+## esperar, informarme
+Espero. = I am waiting.
+¿Por qué espera? = Why are you waiting?
+Quiero informarme. = I want to find out.
+¿Por qué no espera? = Why don't you wait?
+## le espero, espéreme
+Le espero. = I'm waiting for you.
+Me esperan. = They are waiting for me.
+¡Espere! = Wait!
+¡Espéreme aquí! = Wait for me here!
+Un momentito. = Just a moment.
+## esperemos, estoy esperando
+¿Le esperamos? = Shall we wait for you?
+¡Esperemos! = Let's wait!
+No lo compremos. = Let's not buy it.
+Estoy esperando. = I am waiting right now.
+Lo estoy haciendo. = I am doing it right now.
+## -aba / -ía
+Esperaba. = I was waiting.
+Hablaba. = I was speaking.
+Lo hacía. = I was doing it.
+Comían. = They were eating.
+No entendí lo que decía. = I didn't understand what he was saying.
+## Düz/kesik çizgi geçmiş, está hecho
+Lo hacía todos los días. = He used to do it every day.
+Está hecho. = It is done.
+La cena está preparada. = Dinner is ready.
+He aceptado la condición. = I have accepted the condition.
+## visto, puesto, olvidar, seguro
+Lo he visto. = I have seen it.
+Todavía no lo he visto. = I haven't seen it yet.
+¿Dónde lo has puesto? = Where have you put it?
+No lo olvidaré. = I won't forget it.
+Estoy seguro. = I am sure.
+## dejar, recado, pasar el tiempo, preferir
+He dejado un recado. = I have left a message.
+Hemos pasado mucho tiempo aquí. = We have spent a lot of time here.
+Es una buena idea. = It's a good idea.
+Prefiero quedarme aquí. = I prefer to stay here.
+## tener ganas de
+Tengo ganas de salir. = I feel like going out.
+No tengo ganas de trabajar. = I don't feel like working.
+¿Tienes ganas de comer algo? = Do you feel like eating something?
+## preguntar, para
+Me gustaría preguntarle algo. = I would like to ask you something.
+Le preguntaré más tarde. = I will ask you later.
+Le llamo para saber si puede venir. = I'm calling you to find out if you can come.
+## acabo de, hace
+Acabo de llegar. = I have just arrived.
+Acaba de salir. = He has just left.
+Acaba de salir hace diez minutos. = He just left ten minutes ago.
+Llegué hace dos días. = I arrived two days ago.
 
-<script src="data.js"></script>
+@ advanced | Advanced | 2 | Foundation'ın devamı: subjunctive, bütün geçmiş zamanlar, koşul kipleri.
+# CD 1
+## Şimdiki zaman tekrarı, e → ie
+Lo compro. = I'm buying it.
+No lo compro porque es caro. = I'm not buying it because it's expensive.
+Lo entiendo. = I understand it.
+¿Por qué no me entiende? = Why don't you understand me?
+No me entienden. = They don't understand me.
+## -ando / -iendo
+Está preparándolo. = He is preparing it right now.
+Lo está haciendo. = He is doing it right now.
+Está saliendo. = She is leaving right now.
+¿Qué estás comiendo? = What are you eating?
+## decir, empezar
+Me dicen. = They tell me.
+¿Por qué no me dices? = Why don't you tell me?
+Le decimos. = We are telling you.
+¿Por qué no empieza? = Why don't you start?
+Empezamos ahora. = We are starting now.
+## Emir tekrarı
+¡Compre la casa! = Buy the house!
+¡Cómprelo! = Buy it!
+¡No los compres! = Don't buy them!
+¡Llámeme mañana! = Call me tomorrow!
+¡No me llames hoy! = Don't call me today!
+## tengo, digo, vengo, hago
+No lo tenemos. = We don't have it.
+Tengo que verlo. = I have to see it.
+Te digo la verdad. = I'm telling you the truth.
+Viene con nosotros. = She is coming with us.
+¿Qué hace? = What is he doing?
+## saber ile conocer
+¿Lo sabes? = Do you know it?
+Lo sabemos. = We know it.
+Conozco Madrid. = I know Madrid.
+No lo conozco. = I don't know him.
+No la conozco bien. = I don't know her well.
+## Kişiden önce «a»
+¿Conoce a Pedro? = Do you know Pedro?
+Voy a llamar a mi amigo. = I'm going to call my friend.
+Veo a mi hermana. = I see my sister.
+Busco a mi hijo. = I'm looking for my son.
+## salgo, pongo, traigo, oigo
+Salgo mañana. = I'm leaving tomorrow.
+¿Por qué no lo pones aquí? = Why don't you put it here?
+Lo traigo ahora. = I'm bringing it now.
+No oigo nada. = I don't hear anything.
+## ga-ga emir: dígamelo, dígaselo
+¡Dígamelo! = Tell it to me!
+¡No me lo diga! = Don't tell it to me!
+¡Dígaselo! = Tell it to him!
+¡Tráigamelo! = Bring it to me!
+No lo ponga allí. = Don't put it there.
+## tú emri: dímelo, ven, ponlo
+¡Dímelo! = Tell it to me!
+¡Ven conmigo! = Come with me!
+¡Ponlo aquí! = Put it here!
+¡No salgas! = Don't leave!
+¡Hazlo ahora! = Do it now!
+## Subjunctive'e giriş
+Es posible que venga. = It's possible that he may come.
+Espero que esté bien. = I hope she is well.
+Dudo que lo sepa. = I doubt he knows it.
+## es importante que
+Es importante que esté aquí. = It's important that you be here.
+Es importante que me llame. = It's important that you call me.
+No es necesario que me espere. = It's not necessary for you to wait for me.
+Es mejor que salgamos ahora. = It's better that we leave now.
+## esc / est / esp
+estudiar = to study
+escuela = school
+España = Spain
+¡Escríbame! = Write to me!
+Es importante que me escriba. = It's important that you write to me.
+## quiero que…
+Te quiero. = I love you.
+Quiero que me escribas. = I want you to write to me.
+¿Qué quiere que haga? = What do you want me to do?
+Quiero que vengan. = I want them to come.
+## quiero que lo haga
+Quiero que lo haga. = I want you to do it.
+¿Por qué no quiere que se lo diga? = Why don't you want me to tell him?
+Pienso que puede hacerlo. = I think he can do it.
+No pienso que pueda hacerlo. = I don't think he can do it.
+Quiere que se lo mande. = He wants me to send it to him.
+# CD 2
+## Gelecek zaman tekrarı
+Lo compraremos. = We will buy it.
+Le escribiré. = I will write to you.
+Me escribirás. = You will write to me.
+No lo tomarán. = They won't take it.
+## go-go gelecek
+Tendré tiempo. = I will have time.
+Saldremos temprano. = We will leave early.
+Vendrás conmigo. = You will come with me.
+No lo pondré aquí. = I won't put it here.
+Lo venderé. = I will sell it.
+## Geleceği söylemenin 3 yolu
+Le llamaré mañana. = I will call you tomorrow.
+Voy a llamarle mañana. = I'm going to call you tomorrow.
+Le llamo mañana. = I'll call you tomorrow.
+Me quedaré aquí unos días. = I will stay here a few days.
+## diré, haré
+No lo haré. = I won't do it.
+Le diré más tarde por qué. = I'll tell you later why.
+No me dirá. = He won't tell me.
+Lo haremos juntos. = We'll do it together.
+## ¡Haga! / ¡Haz!
+¡Haga una reservación! = Make a reservation!
+¡Haz una reservación! = Make a reservation! (to a friend)
+¡Hazlo! = Do it!
+¡No lo hagas! = Don't do it!
+## Koşul -ría, me gustaría
+Saldría. = I would leave.
+No lo haríamos. = We wouldn't do it.
+No esperaría. = He wouldn't wait.
+Me gustaría verlo. = I would like to see it.
+## he hablado
+He hablado con ella. = I have spoken with her.
+Lo han comprado. = They have bought it.
+Hemos comido bien. = We have eaten well.
+Ha vendido la casa. = He has sold the house.
+## Basit geçmiş: hablé, habló
+Hablé con él. = I spoke with him.
+Lo compré ayer. = I bought it yesterday.
+Lo tomé. = I took it.
+Ella habló conmigo. = She spoke with me.
+Vendí el coche. = I sold the car.
+Salió temprano. = She left early.
+## ayer, anoche
+Le llamé ayer. = I called you yesterday.
+Me llamó anoche. = He called me last night.
+¿A qué hora salió? = What time did you leave?
+¿Por qué no comió? = Why didn't you eat?
+Me escribió. = He wrote to me.
+Lo vi. = I saw it.
+## -aron
+Hablaron. = They spoke.
+Me llamaron. = They called me.
+¿A qué hora llegaron? = What time did you all arrive?
+Lo compraron. = They bought it.
+## hace = önce
+Llegué aquí hace dos horas. = I arrived here two hours ago.
+Lo compré hace una semana. = I bought it a week ago.
+Me llamó hace cinco minutos. = He called me five minutes ago.
+## -ieron, me quedé
+Salieron. = They left.
+No comieron. = They didn't eat.
+Me escribieron. = They wrote to me.
+Me quedé en casa. = I stayed at home.
+Se quedaron. = They stayed.
+## -aste / -iste
+¿A qué hora me llamaste? = What time did you call me?
+¿Por qué no me llamaste? = Why didn't you call me?
+¿A qué hora saliste? = What time did you leave?
+¿Por qué no lo vendiste? = Why didn't you sell it?
+## Biz geçmişi: -amos / -imos
+Llegamos ayer. = We arrived yesterday.
+Salimos tarde. = We left late.
+Vendimos la casa. = We sold the house.
+Comimos en casa. = We ate at home.
+## hice, dije, puse
+Lo hice. = I did it.
+No lo hizo. = He didn't do it.
+Le dije. = I told you.
+Me dijo que no lo hizo. = He told me he didn't do it.
+¿Dónde lo puso? = Where did you put it?
+## pude, quise, vine, tuve, estuve
+No pude hacerlo. = I couldn't do it.
+Lo quise. = I wanted it.
+Vino con vino. = He came with wine.
+Tuve un problema. = I had a problem.
+Estuve en Madrid. = I was in Madrid.
+# CD 3
+## pudieron, dijeron
+Pudieron hacerlo. = They were able to do it.
+Me dijeron. = They told me.
+Vinieron conmigo. = They came with me.
+No lo quisimos. = We didn't want it.
+## Dalış geçmişi tekrarı
+Lo he comprado. = I have bought it.
+¿Dónde lo has comprado? = Where have you bought it?
+No lo ha vendido. = He hasn't sold it.
+¿Dónde lo compró? = Where did you buy it?
+## compraría
+Lo compraría. = He would buy it.
+No lo comprarían. = They wouldn't buy it.
+No lo comprarías. = You wouldn't buy it.
+No lo compraríamos. = We wouldn't buy it.
+## saldría, pondría
+No saldrá. = He won't leave.
+No saldría. = He wouldn't leave.
+Lo pondría aquí. = I would put it here.
+No vendría con nosotros. = He wouldn't come with us.
+## haría, diría
+No lo haríamos. = We wouldn't do it.
+No me diría. = He wouldn't tell me.
+Lo tendré para usted. = I will have it for you.
+¿Qué harías? = What would you do?
+## iré, iría
+Voy a hacerlo. = I am going to do it.
+Iré a verlo. = I will go to see it.
+No iría. = I wouldn't go.
+No iríamos. = We wouldn't go.
+## podré, podría
+Podré hacerlo. = I will be able to do it.
+No podrá hacerlo. = He won't be able to do it.
+No podría hacerlo. = He wouldn't be able to do it.
+## ¿puede? ile ¿podría?
+¿Puede decirme dónde está? = Can you tell me where it is?
+¿Podría decirme dónde está? = Could you tell me where it is?
+¿Podría esperarme? = Could you wait for me?
+¿Podría venir conmigo? = Could you come with me?
+## deber
+Debo hacerlo ahora. = I must do it now.
+¿Cuánto le debo? = How much do I owe you?
+Deberías decirme. = You should tell me.
+Tendría que hacerlo. = I would have to do it.
+## habría vendido
+Lo he vendido. = I have sold it.
+Lo habría vendido. = I would have sold it.
+No lo habría vendido. = I wouldn't have sold it.
+## hecho, dicho, visto
+hecho en España = made in Spain
+No lo he hecho. = I haven't done it.
+Le habría dicho. = I would have told you.
+No lo he visto. = I haven't seen it.
+Habría sido posible. = It would have been possible.
+## -aba / -ía tekrarı
+Hablaban. = They were speaking.
+Me decían. = They were telling me.
+Lo hacíamos. = We were doing it.
+Vendían flores. = They used to sell flowers.
+## iba a
+Iba a hacerlo. = I was going to do it.
+Iba a estar aquí. = He was going to be here.
+No me dijo que iba a llegar hoy. = You didn't tell me you were going to arrive today.
+Le habría esperado. = I would have waited for you.
+## me dijo, dijiste
+Me dijo. = He told me.
+No me dijo. = You didn't tell me.
+No me dijiste. = You didn't tell me. (to a friend)
+## tuve, estuve
+Tuve que salir. = I had to leave.
+Estuve enfermo. = I was sick.
+Hubo un problema. = There was a problem.
+## hicieron, tuvieron, dijimos
+Lo hicieron. = They did it.
+Tuvimos suerte. = We were lucky.
+Le dijimos. = We told you.
+No me dijiste que ibas a llegar hoy. = You didn't tell me you were going to arrive today.
+## esperaba
+Le esperaba. = I was waiting for you.
+Te esperaba. = I was waiting for you. (to a friend)
+Me esperaba. = He was waiting for me.
+Lo hacía todos los días. = He did it every day.
+## hizo ile hacía
+Lo hizo esta mañana. = He did it this morning.
+Me decía. = He used to tell me.
+Lo puso aquí. = He put it here.
+Lo ponía aquí todos los días. = He put it here every day.
+## supe, fui
+Lo supe ayer. = I found out yesterday.
+Fui a verlo anoche. = I went to see it last night.
+Fue a verlo. = He went to see it.
+Fuimos juntos. = We went together.
+## fue / era
+Fue posible. = It was possible.
+Era muy interesante. = It was very interesting.
+Fue un buen día. = It was a good day.
+## sabía, tenía, estaba
+No lo sabía. = I didn't know it.
+No sabía que iba a llegar hoy. = I didn't know you were going to arrive today.
+No tenía tiempo. = I didn't have time.
+Estaba muy ocupado. = I was very busy.
+## quise, quería, querría
+Quería hacerlo. = I wanted to do it.
+Quise hacerlo. = I tried to do it.
+Querría verlo. = I would want to see it.
+# CD 4
+## querría ile quisiera
+Quiso hacerlo. = He wanted to do it.
+Quisieron hacerlo. = They wanted to do it.
+Quisiera un café, por favor. = I'd like a coffee, please.
+## quisiera, me gustaría
+Me gustaría hacerlo. = I would like to do it.
+Quisiera hacerlo. = I would like to do it.
+Me gustaría ir contigo. = I'd like to go with you.
+## podría
+Podría hacerlo. = I could do it.
+¿Podría ayudarme? = Could you help me?
+Puede pasar. = You may come in.
+## tener que / no es necesario que
+Tiene que esperar aquí. = You have to wait here.
+No es necesario que espere. = You don't have to wait.
+No necesitas esperar. = You don't need to wait.
+## podría ile pude
+Quería verlo. = I wanted to see it.
+No pude verlo. = I couldn't see it.
+No podía hacerlo. = I wasn't able to do it.
+¿Podría decirme? = Could you tell me?
+## si supiera, si tuviera
+Si supiera, le diría. = If I knew, I would tell you.
+Si tuviera tiempo, lo haría. = If I had time, I would do it.
+Si estuviera allí, le ayudaría. = If I were there, I would help you.
+## si lo hubiera sabido
+Lo había vendido. = I had sold it.
+Si lo hubiera visto, lo habría comprado. = If I had seen it, I would have bought it.
+Si lo hubiera sabido, le habría dicho. = If I had known it, I would have told you.
+## hiciera
+Si lo hiciera = If I did it
+Si yo lo supiera, le diría. = If I knew it, I would tell you.
+Quería que lo hiciera. = He wanted me to do it.
+## would / would have
+Lo haría. = I would do it.
+Lo compraría. = I would buy it.
+Lo habría comprado. = I would have bought it.
+## compraba, hubiera comprado
+Lo compraba. = I was buying it.
+Lo han vendido. = They have sold it.
+Si lo vendiera = If I sold it
+Si hubiera estado allí anoche = If I had been there last night
+Lo hubiera comprado. = I might have bought it.
+## no pienso que venga
+No pienso que venga. = I don't think he'll come.
+No estaba seguro. = I wasn't sure.
+No sabía que viniera. = I didn't know he might come.
+## ojalá
+¡Ojalá! = Let's hope so!
+Ojalá que venga. = Hopefully he'll come.
+Ojalá que haga buen tiempo. = I hope the weather is good.
+## buscar, poder geçmişte
+Lo buscaba. = I was looking for it.
+Lo perdí y no pude encontrarlo. = I lost it and couldn't find it.
+## si me hubiera llamado
+Lo había comprado. = I had bought it.
+Si me hubiera llamado anoche… = If you had called me last night…
+…le habría esperado. = …I would have waited for you.
+## iba, era, veía
+Iba al cine. = I used to go to the cinema.
+Era un niño. = He was a child.
+Lo veía todos los días. = I used to see him every day.
+Habríamos ido a verlo. = We would have gone to see it.
+## lo hubiera hecho
+Si lo hubiera sabido, lo habría hecho. = If I had known it, I would have done it.
+Lo hubiera hecho. = I might have done it.
+No habría podido hacerlo. = I wouldn't have been able to do it.
+## debería, habría podido
+Debería hacerlo. = I should do it.
+Habría debido decirme. = You should have told me.
+Habría podido decirme. = You could have told me.
+Me habría dicho. = He would have told me.
+## Okumaya geçiş
+Leo el periódico. = I read the newspaper.
+Me gusta leer en español. = I like reading in Spanish.
+Poco a poco. = Little by little.
+
+@ builder | Language Builder | 3 | Günlük kalıplar ve deyimler. Masterclass ile aynı konular.
+# Kayıt 1
+## Başlamak ve istemek
+Vamos a empezar. = We are going to start.
+Empecemos. = Let's start.
+Me gusta estar aquí. = I like being here.
+Quiero hacerlo, pero hoy no puedo. = I want to do it, but I can't today.
+Estoy demasiado ocupado. = I'm too busy.
+## Canı istemek: tener ganas
+Tengo ganas de salir. = I feel like going out.
+No tengo ganas de cocinar. = I don't feel like cooking.
+Tengo ganas de ir al cine. = I feel like going to the cinema.
+Ella no tiene ganas de trabajar hoy. = She doesn't feel like working today.
+## Fikir belirtmek
+Me parece que tienes razón. = I think you're right.
+Estoy de acuerdo contigo. = I agree with you.
+No estoy de acuerdo. = I don't agree.
+¿Cuál es tu opinión? = What is your opinion?
+Me interesa mucho. = It interests me a lot.
+## Belki, elbette, göreceğiz
+Vamos a ver. = We'll see.
+No lo creo. = I don't think so.
+Claro que sí. = Of course.
+Seguramente. = Surely.
+Quizás mañana. = Perhaps tomorrow.
+## İhtiyaç: hay que, lo que
+Hay que ir allí. = One has to go there.
+No hay que comprarlo. = There's no need to buy it.
+Es todo lo que necesito. = It's all I need.
+¿Necesita algo más? = Do you need anything else?
+No, gracias, eso es todo. = No, thank you, that's all.
+## Sormak ve öğrenmek
+¿Podría decirme a qué hora abre? = Could you tell me what time it opens?
+Voy a informarme. = I'll find out.
+Lo estoy buscando. = I'm looking for it.
+¿Hay algún mensaje para mí? = Is there any message for me?
+## Fiyat
+¿Cuánto cuesta? = How much does it cost?
+¿Cuál es el precio? = What is the price?
+No vale la pena. = It's not worth it.
+¿Cuánto le debo? = How much do I owe you?
+Está bien así. = It's fine like this.
+## Davet, kabul, ret
+¿Te gustaría venir conmigo? = Would you like to come with me?
+Con mucho gusto. = With pleasure.
+Es una buena idea. = It's a good idea.
+Siento decirte que no puedo ir. = I'm sorry to tell you I can't go.
+Debería descansar un rato. = I should rest for a while.
+## Plan ve niyet
+Pienso salir la semana que viene. = I plan to leave next week.
+Espero volver pronto. = I hope to come back soon.
+No tengo la intención de comprarlo. = I don't intend to buy it.
+No tengo tiempo de hacerlo. = I don't have time to do it.
+## ¿Abro la ventana?, iba a
+¿Abro la ventana? = Shall I open the window?
+¿Cierro la puerta? = Shall I close the door?
+¿Le espero? = Shall I wait for you?
+Iba a llamarte. = I was going to call you.
+No sabía que ibas a venir. = I didn't know you were going to come.
+# Kayıt 2
+## ¿Qué hay?, la primera vez
+¿Qué hay para comer? = What is there to eat?
+¿Puedo ofrecerte algo para beber? = Can I offer you something to drink?
+Es la primera vez. = It's the first time.
+la próxima vez = next time
+muchas veces = many times
+## acabo de, volver
+Acabo de verlo. = I have just seen it.
+Acabo de llegar hace dos días. = I just arrived two days ago.
+Va a volver más tarde. = She'll come back later.
+Prefiero quedarme aquí. = I'd rather stay here.
+## hace … que
+Hace diez minutos que te espero. = I've been waiting for you for ten minutes.
+¿Cuánto tiempo hace que vive aquí? = How long have you lived here?
+Hace un año que estudio español. = I've been studying Spanish for a year.
+## dejar
+Me gustaría dejar un mensaje. = I'd like to leave a message.
+Dejé la llave en casa. = I left the key at home.
+¿Puede dejarme trabajar? = Can you let me work?
+## Se puede, ¿cómo se dice?
+¿Cómo se dice en español? = How do you say it in Spanish?
+¿Cómo se escribe? = How do you spell it?
+¿Se puede entrar? = May one come in?
+Aquí se habla español. = Spanish is spoken here.
+## Yol ve araba
+¿Está lejos de aquí? = Is it far from here?
+Está cerca. Se puede ir a pie. = It's close. You can walk.
+Quisiera alquilar un coche. = I'd like to rent a car.
+¿Cuánto es por día? = How much is it per day?
+## Duygular
+Estoy enfadado. = I'm angry.
+Me preocupa mucho. = It worries me a lot.
+Estoy aburrido. = I'm bored.
+No me sorprende. = It doesn't surprise me.
+## Sıcak, aç, susamış
+Hace calor hoy. = It's hot today.
+Tengo frío. = I'm cold.
+Tengo hambre. = I'm hungry.
+Tengo sed. = I'm thirsty.
+No puedo soportar el calor. = I can't stand the heat.
+## mismo; bana getir
+Quiero lo mismo. = I want the same.
+No es lo mismo. = It's not the same.
+¿Puede traérmelo? = Can you bring it to me?
+¿Puede mostrármelo? = Can you show it to me?
+## saber ile conocer, «a»
+Sé dónde está. = I know where it is.
+Conozco la ciudad. = I know the city.
+Conozco a esta señora. = I know this lady.
+Suele venir aquí. = He usually comes here.
+## hay, había, habrá
+Hay mucha gente. = There are many people.
+Había mucho ruido. = There was a lot of noise.
+Habrá menos gente mañana. = There will be fewer people tomorrow.
+## Vedalaşma
+¿A qué hora nos vemos? = What time shall we meet?
+Nos vemos mañana a la misma hora. = See you tomorrow at the same time.
+¡Buena suerte! = Good luck!
+¡Buen viaje! = Have a good trip!
+Hasta luego. = See you later.
+
+@ vocabulary | Vocabulary | 4 | Kelime hazinesi: İngilizceden İspanyolcaya dönüşüm kuralları, fiiller, günlük ifadeler.
+# CD 1
+## -ible → -ible
+posible = possible
+horrible = horrible
+terrible = terrible
+visible = visible
+Es imposible. = It's impossible.
+## -able → -able
+probable = probable
+aceptable = acceptable
+confortable = comfortable
+Es muy probable. = It's very probable.
+## -ar fiilinden -able
+dudar → dudable = to doubt → doubtful
+soportar → soportable = to bear → bearable
+tolerar → tolerable = to tolerate → tolerable
+El calor no es soportable. = The heat is not bearable.
+## in- ile olumsuz
+evitable → inevitable = avoidable → unavoidable
+tolerable → intolerable = tolerable → intolerable
+útil → inútil = useful → useless
+Es inevitable. = It's unavoidable.
+## Küçültme eki -ito
+hijo → hijito = son → little son
+casa → casita = house → little house
+Un momentito. = Just a moment.
+Juan → Juanito = John → Johnny
+## -er / -ir fiilinden -ible
+creer → creíble = to believe → believable
+vender → vendible = to sell → sellable
+flexible = flexible
+compatible = compatible
+## -ant → -ante
+importante = important
+elegante = elegant
+participante = participant
+Es una situación alarmante. = It's an alarming situation.
+## -ent → -ente
+diferente = different
+evidente = evident
+inteligente = intelligent
+competente = competent
+## -tion → -ción
+la condición = the condition
+la atención = the attention
+la nación = the nation
+la solución = the solution
+## -sion → -sión
+la impresión = the impression
+la decisión = the decision
+la misión = the mission
+la televisión = the television
+## -ence → -encia
+la influencia = the influence
+la diferencia = the difference
+la paciencia = the patience
+la experiencia = the experience
+## Dişil görünen eril kelimeler
+el problema = the problem
+el mapa = the map
+el clima = the climate
+el sistema = the system
+el idioma = the language
+# CD 2
+## -ance → -ancia
+la importancia = the importance
+la elegancia = the elegance
+la distancia = the distance
+la tolerancia = the tolerance
+## -ly → -mente
+naturalmente = naturally
+personalmente = personally
+exactamente = exactly
+realmente = actually
+## -ary → -ario
+el vocabulario = the vocabulary
+necesario = necessary
+el diccionario = the dictionary
+ordinario = ordinary
+## -ive → -ivo
+exclusivo = exclusive
+positivo = positive
+creativo = creative
+negativo = negative
+## -ute → -uto, -ous → -oso
+absoluto = absolute
+el instituto = the institute
+famoso = famous
+delicioso = delicious
+## -ical → -ico
+práctico = practical
+político = political
+básico = basic
+mágico = magic
+## -ent → -ento, -ic → -ico
+el talento = the talent
+el momento = the moment
+honesto = honest
+dramático = dramatic
+automático = automatic
+## -ure → -ura
+la temperatura = the temperature
+la cultura = the culture
+la literatura = the literature
+la aventura = the adventure
+## -tude → -tud
+la actitud = the attitude
+la gratitud = the gratitude
+la altitud = the altitude
+la multitud = the crowd
+## -ity → -dad
+la posibilidad = the possibility
+la universidad = the university
+la ciudad = the city
+la libertad = the liberty
+## -ist → -ista
+el artista = the artist
+el dentista = the dentist
+el turista = the tourist
+optimista = optimist
+## -y → -ía
+la filosofía = the philosophy
+la geografía = the geography
+la economía = the economy
+la energía = the energy
+## -ine → -ina
+la gasolina = the gasoline
+la medicina = the medicine
+la disciplina = the discipline
+la oficina = the office
+## -id → -ido
+sólido = solid
+válido = valid
+rápido = rapid
+tímido = timid
+## -ism → -ismo, -ure → -uro
+el turismo = the tourism
+el optimismo = the optimism
+el futuro = the future
+seguro = sure
+## Düzenli -ar fiilleri
+usar = to use
+evitar = to avoid
+mencionar = to mention
+gastar = to spend
+No quiero gastar mucho. = I don't want to spend much.
+## gustar, debería, -aba
+Nos gusta viajar. = We like to travel.
+Deberías estudiar más. = You should study more.
+Ganaba mucho dinero. = He used to earn a lot of money.
+# CD 3
+## -tion kelimesinden fiil
+invitación → invitar = invitation → to invite
+justificación → justificar = justification → to justify
+Te invito a cenar. = I invite you to dinner.
+Quiero estudiar español. = I want to study Spanish.
+## si fuera…
+Si fuera rico, viajaría por el mundo. = If I were rich, I would travel around the world.
+Si fuera más joven, estudiaría música. = If I were younger, I would study music.
+## limpiar, besar, prestar
+Tengo que limpiar la casa. = I have to clean the house.
+¿Me prestas tu libro? = Will you lend me your book?
+¡No lo toque! = Don't touch it!
+## Düzenli -er / -ir
+Bebo agua. = I drink water.
+Aprendo español. = I'm learning Spanish.
+¿Puede responder? = Can you answer?
+## Dönüşlü fiiller
+Me despierto temprano. = I wake up early.
+Me visto rápido. = I get dressed quickly.
+Se casaron el año pasado. = They got married last year.
+Me di cuenta. = I realized.
+Se come bien aquí. = One eats well here.
+## Edilgen «se»
+El museo se abre a las diez. = The museum opens at ten.
+Se venden casas. = Houses for sale.
+## prometer, llover, ofrecer
+Te lo prometo. = I promise you.
+Va a llover. = It's going to rain.
+Nos ofrecen un descuento. = They offer us a discount.
+## deber, valer, sino
+Debes descansar. = You should rest.
+Vale la pena. = It's worth it.
+No es caro sino barato. = It's not expensive but cheap.
+## creer, crecer, reconocer
+Creo que sí. = I think so.
+Los niños crecen rápido. = Children grow fast.
+No te reconocí. = I didn't recognize you.
+## -ir fiilleri
+Abro la puerta. = I open the door.
+Decidimos quedarnos. = We decided to stay.
+Recibí tu mensaje. = I received your message.
+Está prohibido fumar. = Smoking is prohibited.
+## destruir, construir
+Construyen una casa. = They are building a house.
+Destruyo el papel. = I destroy the paper.
+## traducir, traduje
+Traduzco el texto. = I translate the text.
+Lo traduje ayer. = I translated it yesterday.
+Producen vino. = They produce wine.
+## subir, salir con
+Subimos al tren. = We get on the train.
+Sale con su novia. = He goes out with his girlfriend.
+No subas la voz. = Don't raise your voice.
+## e → ie
+Pierdo las llaves. = I lose the keys.
+Cierra la puerta. = Close the door.
+No me mientas. = Don't lie to me.
+## o → ue
+¿Cuánto cuesta? = How much does it cost?
+Me acuesto tarde. = I go to bed late.
+No me acuerdo. = I don't remember.
+## mostrar, jugar
+Te muestro la casa. = I'll show you the house.
+Juego al fútbol. = I play football.
+# CD 4
+## e → i: vestirse, servir, repetir
+Me visto. = I get dressed.
+¿Puede repetir, por favor? = Can you repeat, please?
+Sirven la cena a las nueve. = They serve dinner at nine.
+## Hadi…, dígamelo
+¡Hablemos! = Let's talk!
+¡Comamos! = Let's eat!
+¡Dígamelo! = Tell it to me!
+## Subjunctive tetikleyicileri
+Quiero que vengas. = I want you to come.
+Me alegro de que estés aquí. = I'm glad you're here.
+Es una lástima que no puedas venir. = It's a shame you can't come.
+Dudo que sea verdad. = I doubt it's true.
+## Subjunctive pratiği
+Prefiero que me llames. = I prefer that you call me.
+Es imposible que lo sepa. = It's impossible that he knows.
+Temo que llegue tarde. = I'm afraid he'll arrive late.
+## acabar de
+Acabo de comer. = I have just eaten.
+Acabamos de llegar. = We have just arrived.
+## dejar de, volver a
+Dejé de fumar. = I stopped smoking.
+Volvió a llamar. = He called again.
+Hay que aprovechar el tiempo. = One has to make the most of the time.
+## contar con, darse cuenta
+Puedes contar conmigo. = You can count on me.
+Cambié de opinión. = I changed my mind.
+Estoy de acuerdo contigo. = I agree with you.
+## querer decir, valer la pena
+¿Qué quiere decir esto? = What does this mean?
+No vale la pena. = It's not worth it.
+## hacer + zaman
+Lo comí hace una hora. = I ate it an hour ago.
+Hace mucho tiempo. = A long time ago.
+Hace dos años que vivo aquí. = I've lived here for two years.
+## Hava durumu
+Hace frío. = It's cold.
+Hace calor. = It's hot.
+Hace viento. = It's windy.
+Hace sol. = It's sunny.
+¿Qué tiempo hace? = What's the weather like?
+## tener ifadeleri
+Tengo prisa. = I'm in a hurry.
+Tengo sueño. = I'm sleepy.
+Tienes razón. = You're right.
+Ten cuidado. = Be careful.
+Tengo suerte. = I'm lucky.
+## tener años, tener lugar
+Tengo treinta años. = I am thirty years old.
+La reunión tiene lugar mañana. = The meeting takes place tomorrow.
+Ten paciencia. = Be patient.
+No tiene lógica. = It doesn't make sense.
+## para; soru kelimeleri; günler
+Es para ti. = It's for you.
+¿Cuál prefieres? = Which one do you prefer?
+lunes, martes, miércoles = Monday, Tuesday, Wednesday
+jueves, viernes = Thursday, Friday
+sábado, domingo = Saturday, Sunday
+## antes, después; mevsim ve aylar
+antes de comer = before eating
+después del trabajo = after work
+la primavera, el verano = spring, summer
+el otoño, el invierno = autumn, winter
+enero, febrero, marzo = January, February, March
+# CD 5
+## Saat ve sayılar
+¿Qué hora es? = What time is it?
+Es la una. = It's one o'clock.
+Son las cuatro y cuarto. = It's a quarter past four.
+Son las cinco y media. = It's half past five.
+uno, dos, tres, cuatro, cinco = one, two, three, four, five
+## para
+Salgo para Madrid. = I'm leaving for Madrid.
+Para un niño, habla muy bien. = For a child, he speaks very well.
+Estudia para ser médico. = She is studying to be a doctor.
+Lo necesito para el lunes. = I need it by Monday.
+## por: karşılığında, başına
+Lo compré por diez euros. = I bought it for ten euros.
+Cien kilómetros por hora. = A hundred kilometres per hour.
+Gracias por todo. = Thanks for everything.
+## por: içinden, süre
+Caminamos por el parque. = We walk through the park.
+Estudié por dos horas. = I studied for two hours.
+Por ahora, está bien. = For now, it's fine.
+## por ifadeleri
+¡Por fin! = Finally!
+por ejemplo = for example
+Por lo visto, no viene. = Apparently he's not coming.
+¡Por Dios! = For heaven's sake!
+## para mı por mu?
+Voy por pan. = I'm going to get bread.
+Este regalo es para ti. = This gift is for you.
+Lo hice por ti. = I did it for your sake.
+## lo bueno, lo mío
+Lo bueno es que estamos juntos. = The good thing is that we're together.
+Lo importante es aprender. = The important thing is to learn.
+Lo mío es tuyo. = What's mine is yours.
+## ser
+Es mi amigo. = He is my friend.
+La casa es de mi padre. = The house belongs to my father.
+Es muy alto. = He is very tall.
+## ser: renk, köken, meslek
+El coche es rojo. = The car is red.
+Soy de Turquía. = I am from Turkey.
+Ella es médica. = She is a doctor.
+## estar
+Estoy cansado. = I'm tired.
+Estoy hablando. = I'm speaking right now.
+El hotel está en el centro. = The hotel is in the center.
+## ser mi estar mı?
+Es aburrido. = He is boring.
+Está aburrido. = He is bored.
+Es guapo. = He is handsome.
+Está guapo hoy. = He looks good today.
+## Çifte olumsuzluk
+No tengo nada. = I have nothing.
+No hay nadie. = There's nobody.
+Nunca voy allí. = I never go there.
+¡Yo tampoco! = Me neither!
+¡De ninguna manera! = No way!
+## Karşılaştırma
+Es más grande que el mío. = It's bigger than mine.
+Es menos caro. = It's less expensive.
+Es mejor. = It's better.
+Es lo peor. = It's the worst.
+Mi hermano mayor = My older brother
+## Zıt anlamlılar
+bueno, malo = good, bad
+fácil, difícil = easy, difficult
+grande, pequeño = big, small
+la entrada, la salida = the entrance, the exit
+## in- / des- ile zıt
+feliz, infeliz = happy, unhappy
+agradable, desagradable = pleasant, unpleasant
+cómodo, incómodo = comfortable, uncomfortable
+## sin embargo, konum
+Sin embargo, me gusta. = However, I like it.
+A ver… = Let's see…
+Está dentro de la caja. = It's inside the box.
+Está detrás de la puerta. = It's behind the door.
+Está cerca del hotel. = It's near the hotel.
+## encima, debajo, al menos
+Está encima de la mesa. = It's on top of the table.
+Está debajo de la silla. = It's under the chair.
+Al menos lo intenté. = At least I tried.
+Por lo menos dos horas. = At least two hours.
+`;
+</script>
 <script>
 "use strict";
-const $ = (s) => document.querySelector(s);
-const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const ICON = {
-  play: '<svg width="34" height="34" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
-  pause: '<svg width="34" height="34" viewBox="0 0 24 24"><rect fill="currentColor" x="6" y="5" width="4.2" height="14" rx="1.2"/><rect fill="currentColor" x="13.8" y="5" width="4.2" height="14" rx="1.2"/></svg>',
-  prev: '<svg width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M6 5h2v14H6zM20 6.2v11.6a.8.8 0 0 1-1.2.7L9.6 12.7a.8.8 0 0 1 0-1.4l9.2-5.8a.8.8 0 0 1 1.2.7z"/></svg>',
-  next: '<svg width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M16 5h2v14h-2zM4 6.2v11.6a.8.8 0 0 0 1.2.7l9.2-5.8a.8.8 0 0 0 0-1.4L5.2 5.5A.8.8 0 0 0 4 6.2z"/></svg>'
-};
-
-/* ---------- depolama ---------- */
-const LS = {
-  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
-};
-let DB;
-function openDB() {
-  return new Promise((res, rej) => {
-    const r = indexedDB.open("mt-audio", 1);
-    r.onupgradeneeded = () => r.result.createObjectStore("files");
-    r.onsuccess = () => { DB = r.result; res(); };
-    r.onerror = () => rej(r.error);
-  });
-}
-const idb = (mode, fn) => new Promise((res, rej) => {
-  const tx = DB.transaction("files", mode), st = tx.objectStore("files");
-  const out = fn(st); tx.oncomplete = () => res(out && out.result); tx.onerror = () => rej(tx.error);
-});
-const putFile = (k, v) => idb("readwrite", (s) => s.put(v, k));
-const getFile = (k) => idb("readonly", (s) => s.get(k));
-const delFile = (k) => idb("readwrite", (s) => s.delete(k));
-
-const discKey = (c, d) => `${c}|${d}`;
-const trackKey = (c, d, i) => `${c}|${d}|${i}`;
-const loadedNames = (c, d) => LS.get("names:" + discKey(c, d), []);
-let done = new Set(LS.get("done", []));
-const saveDone = () => LS.set("done", [...done]);
-
-/* ---------- veri yardımcıları ---------- */
-const course = (id) => COURSES.find((c) => c.id === id);
-function discTracks(c, d) { // görüntülenecek parça listesi
-  const names = loadedNames(c.id, d.id);
-  const n = d.auto ? names.length : Math.max(d.tracks.length, names.length);
-  const out = [];
-  for (let i = 0; i < n; i++) {
-    const base = d.tracks[i] || { title: d.auto ? prettyName(names[i]) || `Parça ${i + 1}` : `Parça ${i + 1}` };
-    out.push({ ...base, i, file: names[i], key: trackKey(c.id, d.id, i) });
+/* ---------- içerik ---------- */
+const COURSES = [];
+(function parse(){
+  let c=null,d=null,t=null;
+  for (let line of RAW.split("\n")) {
+    line=line.trim(); if(!line) continue;
+    if (line.startsWith("@")) { const [id,short,step,note]=line.slice(1).split("|").map(s=>s.trim()); c={id,short,step:+step,note,discs:[]}; COURSES.push(c); }
+    else if (line.startsWith("## ")) { t={title:line.slice(3),pairs:[]}; d.tracks.push(t); }
+    else if (line.startsWith("# ")) { d={label:line.slice(2),tracks:[]}; c.discs.push(d); }
+    else { const i=line.indexOf(" = "); if(i>0) t.pairs.push([line.slice(0,i),line.slice(i+3)]); }
   }
+})();
+const COLORS={foundation:"#e4573d",advanced:"#efb72f",builder:"#4fbf84",vocabulary:"#5ea3e0"};
+const FULL={foundation:"Foundation",advanced:"Advanced",builder:"Language Builder",vocabulary:"Vocabulary"};
+
+/* ---------- yardımcılar ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const ICON={
+  play:s=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
+  pause:s=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true"><rect fill="currentColor" x="6" y="5" width="4.2" height="14" rx="1.2"/><rect fill="currentColor" x="13.8" y="5" width="4.2" height="14" rx="1.2"/></svg>`,
+  back:`<svg width="38" height="38" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/></svg>`,
+  fwd:`<svg width="38" height="38" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 6.2v11.6a.8.8 0 0 0 1.2.7l9.2-5.8a.8.8 0 0 0 0-1.4L6.2 5.5A.8.8 0 0 0 5 6.2zM17 5h2v14h-2z"/></svg>`
+};
+function toast(m,ms=2600){const e=document.createElement("div");e.className="toast";e.textContent=m;document.body.append(e);setTimeout(()=>e.remove(),ms)}
+const course=id=>COURSES.find(c=>c.id===id);
+const tKey=(c,d,t)=>`${c}|${d}|${t}`;
+let done=new Set(LS.get("done",[]));
+
+/* ---------- ayarlar ---------- */
+const DEF={order:"pair",reps:2,rate:0.9,gap:"normal",esVoice:"",enVoice:""};
+let S=Object.assign({},DEF,LS.get("settings",{}));
+const saveS=()=>LS.set("settings",S);
+const GAPS={short:[350,800],normal:[600,1300],long:[900,2600]};
+
+/* ---------- sesler ---------- */
+let VOICES=[];
+const synth=window.speechSynthesis;
+function loadVoices(){ if(!synth) return; VOICES=synth.getVoices(); if(location.hash.slice(1)==="") renderHome(); }
+if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+function score(v,pref){ let s=0; const n=v.name.toLowerCase();
+  if(/premium|enhanced|neural|natural|geliş/i.test(n)) s+=50;
+  pref.forEach((p,i)=>{ if(v.lang.replace("_","-").toLowerCase().startsWith(p)) s+=30-i*5; });
+  if(/m[oó]nica|paulina|jorge|marisol|samantha|daniel|karen|ava|zoe|serena/i.test(n)) s+=10;
+  if(v.localService) s+=3; return s; }
+function pickVoice(lang){
+  const want=lang==="es"?S.esVoice:S.enVoice;
+  const list=VOICES.filter(v=>v.lang.toLowerCase().startsWith(lang));
+  return list.find(v=>v.voiceURI===want) || list.sort((a,b)=>score(b,lang==="es"?["es-es","es-mx","es"]:["en-us","en-gb","en"])-score(a,lang==="es"?["es-es","es-mx","es"]:["en-us","en-gb","en"]))[0] || null;
+}
+const clean=s=>s.replace(/\([^)]*\)/g,"").replace(/→/g,", ").replace(/…/g,"").replace(/\s+/g," ").trim();
+
+/* ---------- oynatma motoru ---------- */
+let P=null;           // {c,d,t,p,ph}
+let playing=false, token=0, timer=null, wake=null;
+function steps(){ // bir cümle çifti için okunacak sıra
+  const r=S.reps, out=[];
+  if(S.order==="pair"){ for(let i=0;i<r;i++){out.push("es","en");} }
+  else if(S.order==="block"){ for(let i=0;i<r;i++)out.push("es"); for(let i=0;i<r;i++)out.push("en"); }
+  else { for(let i=0;i<r;i++)out.push("en"); for(let i=0;i<r;i++)out.push("es"); }
   return out;
 }
-const prettyName = (n) => n ? n.replace(/\.[a-z0-9]+$/i, "").replace(/[_]+/g, " ") : "";
-function courseQueue(c) { // yüklü parçalar, sırayla
-  const q = [];
-  c.discs.forEach((d) => discTracks(c, d).forEach((t) => { if (t.file) q.push({ c, d, t }); }));
-  return q;
+const cur=()=>{ if(!P) return null; const c=course(P.c),d=c.discs[P.d],t=d.tracks[P.t]; return {c,d,t,pair:t.pairs[P.p]}; };
+function start(cid,di,ti,pi=0){
+  P={c:cid,d:di,t:ti,p:pi,ph:0}; playing=true; save(); speakNext(); ui(); keepAwake();
 }
-function courseStats(c) {
-  let total = 0, fin = 0, loaded = 0;
-  c.discs.forEach((d) => discTracks(c, d).forEach((t) => { total++; if (done.has(t.key)) fin++; if (t.file) loaded++; }));
-  return { total, fin, loaded };
+function save(){ if(P) LS.set("last",{c:P.c,d:P.d,t:P.t,p:P.p}); }
+function speakNext(){
+  clearTimeout(timer); if(!playing||!P) return;
+  const x=cur(); if(!x) return;
+  const st=steps();
+  if(P.ph>=st.length){ P.p++; P.ph=0;
+    if(P.p>=x.t.pairs.length){ done.add(tKey(P.c,P.d,P.t)); LS.set("done",[...done]); return nextTrack(true); }
+    save(); ui(); timer=setTimeout(speakNext,GAPS[S.gap][1]); return; }
+  const lang=st[P.ph], text=clean(lang==="es"?x.pair[0]:x.pair[1]);
+  highlight(lang);
+  if(!synth){ toast("Bu tarayıcı seslendirmeyi desteklemiyor"); return pause(); }
+  const u=new SpeechSynthesisUtterance(text), my=++token;
+  const v=pickVoice(lang); if(v) u.voice=v; u.lang=v?v.lang:(lang==="es"?"es-ES":"en-US");
+  u.rate=S.rate; u.pitch=1;
+  let fired=false;
+  const after=()=>{ if(fired||my!==token) return; fired=true; clearTimeout(timer); P.ph++;
+    const g=GAPS[S.gap]; timer=setTimeout(speakNext,P.ph%2===0&&S.order!=="pair"?g[0]:g[0]); };
+  u.onend=after; u.onerror=e=>{ if(e.error==="interrupted"||e.error==="canceled") return; after(); };
+  synth.cancel(); synth.speak(u);
+  // iOS bazen onend göndermez: metin uzunluğuna göre yedek zamanlayıcı
+  timer=setTimeout(after, 2500 + text.length*95/S.rate);
 }
-const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); const m = Math.floor(s / 60); return `${m}:${String(s % 60).padStart(2, "0")}`; };
-function toast(msg, ms = 2600) { const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.append(t); setTimeout(() => t.remove(), ms); }
+function highlight(lang){ $("#cEs").classList.toggle("speaking",lang==="es"); $("#cEn").classList.toggle("speaking",lang==="en"); }
+function pause(){ playing=false; token++; clearTimeout(timer); synth&&synth.cancel(); if(P)P.ph=0; highlight(""); ui(); }
+function toggle(){ if(playing) return pause(); if(!P){ const l=LS.get("last"); if(l&&course(l.c)) return start(l.c,l.d,l.t,l.p); return start("foundation",0,0,0);} playing=true; P.ph=0; speakNext(); ui(); keepAwake(); }
+function jumpPair(dir){ if(!P) return; const x=cur(); token++; synth&&synth.cancel(); clearTimeout(timer);
+  P.p=Math.max(0,P.p+dir); P.ph=0;
+  if(P.p>=x.t.pairs.length) return nextTrack(playing);
+  save(); ui(); if(playing) timer=setTimeout(speakNext,250); }
+function nextTrack(autoplay,dir=1){
+  const c=course(P.c); let d=P.d,t=P.t+dir;
+  if(t>=c.discs[d].tracks.length){ d++; t=0; }
+  if(t<0){ d--; if(d<0){d=0;t=0;} else t=c.discs[d].tracks.length-1; }
+  if(d>=c.discs.length){ pause(); toast(`${FULL[c.id]} bitti! Sıradaki kursa geçebilirsin 🎉`,4000); return; }
+  P={c:P.c,d,t,p:0,ph:0}; save(); ui(); if(autoplay){ playing=true; toast(c.discs[d].tracks[t].title,1800); timer=setTimeout(speakNext,1500); }
+}
+async function keepAwake(){ try{ if("wakeLock" in navigator && !wake){ wake=await navigator.wakeLock.request("screen"); wake.addEventListener("release",()=>wake=null);} }catch{} }
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden&&playing) keepAwake(); });
 
-/* ---------- görünümler ---------- */
-function render() {
-  const h = location.hash.slice(1);
-  if (h.startsWith("c/")) renderCourse(course(h.slice(2)) || COURSES[0]); else renderHome();
-  syncNowMarkers();
+/* ---------- arayüz ---------- */
+function ui(){
+  const x=cur(); $("#mini").hidden=!x; if(!x) return;
+  const pp=playing?ICON.pause:ICON.play;
+  $("#miniPP").innerHTML=pp(26); $("#bPlay").innerHTML=pp(54);
+  $("#miniT").textContent=x.pair?x.pair[0]:x.t.title;
+  $("#miniS").textContent=`${FULL[x.c.id]} · ${x.d.label} · ${x.t.title}`;
+  $("#miniProg").style.width=((P.p)/x.t.pairs.length*100)+"%";
+  $("#cWhere").textContent=`${FULL[x.c.id]} · ${x.d.label} · ${P.t+1}. bölüm`;
+  $("#cLesson").textContent=x.t.title;
+  $("#cEs").textContent=x.pair?x.pair[0]:""; $("#cEn").textContent=x.pair?x.pair[1]:"";
+  $("#cDots").innerHTML=x.t.pairs.map((_,i)=>`<i class="${i<P.p?"d":i===P.p?"c":""}"></i>`).join("");
+  $("#bPrev").innerHTML=ICON.back+"<span>Tekrar / önceki</span>";
+  $("#bNext").innerHTML=ICON.fwd+"<span>Sonraki cümle</span>";
+  document.querySelectorAll(".trk.now").forEach(e=>e.classList.remove("now"));
+  const el=document.querySelector(`.trk[data-k="${tKey(P.c,P.d,P.t)}"]`); if(el) el.classList.add("now");
 }
+function stats(c){ let tot=0,f=0,pairs=0; c.discs.forEach((d,di)=>d.tracks.forEach((t,ti)=>{tot++;pairs+=t.pairs.length;if(done.has(tKey(c.id,di,ti)))f++;})); return {tot,f,pairs}; }
 
-function renderHome() {
-  $("#hdr").innerHTML = `<h1><span class="flag"></span>Michel Thomas · Español</h1>`;
-  const last = LS.get("last");
-  let resume = "";
-  if (last) {
-    const c = course(last.c), d = c && c.discs.find((x) => x.id === last.d), t = d && discTracks(c, d)[last.i];
-    if (t && t.file) resume = `<button class="resume" id="resumeBtn"><span class="big">${ICON.play}</span>
-      <span><small>Kaldığın yerden devam · ${esc(c.short)} ${esc(d.label)} · ${t.i + 1}. parça · ${fmt(last.time)}</small><b>${esc(t.title)}</b></span></button>`;
-  }
-  const card = (c) => {
-    const s = courseStats(c), pct = s.total ? Math.round((s.fin / s.total) * 100) : 0;
-    const num = c.optional ? `<span class="num opt" style="background:${c.color}99">tekrar</span>`
-      : c.step ? `<span class="num" style="background:${c.color}">${c.step}</span>`
-      : `<span class="num opt" style="background:#4a3f36;color:var(--mute)">alt.</span>`;
-    return `<button class="step" data-go="${c.id}">${num}<span style="flex:1;min-width:0">
-      <b>${esc(c.title)}</b>${c.alt ? `<span class="tag">${esc(c.alt)}</span>` : ""}
-      <p>${esc(c.note)}</p><div class="bar"><i style="width:${pct}%"></i></div>
-      <div class="meta">${s.fin}/${s.total || "?"} parça bitti · ${s.loaded} ses dosyası yüklü</div></span></button>`;
-  };
-  $("#app").innerHTML = `${resume}
-    <h2>Sıfırdan öğrenme sırası</h2>
-    ${COURSES.filter((c) => c.step).sort((a, b) => a.step - b.step).map(card).join("")}
-    <div class="note"><b>Nasıl ilerle:</b> Foundation'ı baştan sona dinle → Foundation Review ile pekiştir → Advanced → Advanced Review → Language Builder → Vocabulary. Michel'in kuralı: ezberleme, cevabı öğrencilerden <b>önce</b> sesli söylemeye çalış.</div>
-    <h2>Aynı içeriğin diğer baskıları</h2>
-    ${COURSES.filter((c) => !c.step).map(card).join("")}
-    <div class="note">Total Spanish = Foundation + Vocabulary (CD 1-2) · Masterclass = Language Builder · Start/Introductory = Foundation'ın ilk 2 saati. Elinde hangi CD'ler varsa onları yükle, ikinci kez yükleme.</div>
-    <h2>Depolama</h2><div class="note" id="storage">Hesaplanıyor…</div>`;
-  $("#app").querySelectorAll("[data-go]").forEach((b) => b.onclick = () => location.hash = "c/" + b.dataset.go);
-  const rb = $("#resumeBtn"); if (rb) rb.onclick = () => playAt(last.c, last.d, last.i, last.time, true);
-  if (navigator.storage && navigator.storage.estimate) navigator.storage.estimate().then((e) => {
-    $("#storage") && ($("#storage").innerHTML = `Kullanılan: <b>${(e.usage / 1e6).toFixed(0)} MB</b> / yaklaşık ${(e.quota / 1e9).toFixed(1)} GB. Ses dosyaları sadece bu telefonda saklanır.`);
-  }); else $("#storage").textContent = "Ses dosyaları sadece bu telefonda saklanır.";
-}
-
-function renderCourse(c) {
-  $("#hdr").innerHTML = `<button class="back" onclick="location.hash=''" aria-label="Geri">‹</button><h1>${esc(c.title)}</h1>`;
-  const discs = c.discs.map((d) => {
-    const tr = discTracks(c, d), names = loadedNames(c.id, d.id);
-    const need = d.auto ? "" : ` / ${d.tracks.length}`;
-    const rows = tr.length ? tr.map((t) => `<button class="trk ${t.file ? "" : "off"}" data-k="${t.key}" data-d="${d.id}" data-i="${t.i}">
-        <span class="n">${t.i + 1}</span><span class="t">${esc(t.title)}<span>${t.ref ? esc(t.ref) + " · " : ""}${t.file ? esc(t.file) : "ses dosyası yok"}</span></span>
-        <span class="st ${done.has(t.key) ? "done" : ""}"></span></button>`).join("")
-      : `<div class="empty">Bu CD'nin parça listesi kitapçıkta yok. Dosyaları yükleyince parçalar burada sıralanır.</div>`;
-    return `<section class="disc"><div class="disc-h"><b>${esc(d.label)}</b>
-        <span class="cnt">${names.length}${need} yüklü</span>
-        ${names.length ? `<button class="btn ghost" data-del="${d.id}">Sil</button>` : ""}
-        <button class="btn ${names.length ? "" : "pri"}" data-imp="${d.id}">${names.length ? "Değiştir" : "Ses yükle"}</button></div>
-        ${d.desc ? `<div class="desc">${esc(d.desc)}</div>` : ""}${rows}</section>`;
-  }).join("");
-  $("#app").innerHTML = `<div class="note" style="margin:0 0 14px">${esc(c.note)}<br><span style="color:var(--dim)">Kitapçık: ${esc(c.pdf)}</span></div>
-    ${discs}
-    <div class="note"><b>Ses yükleme:</b> Her CD'nin MP3'lerini telefonundaki Dosyalar uygulamasından seç (o CD'nin tüm parçalarını birlikte). Dosya adlarındaki numaraya göre sıralanıp 1, 2, 3… parçalara eşlenir — örn. <i>01.mp3, 02.mp3</i> ya da <i>Track 01</i>.</div>`;
-  const app = $("#app");
-  app.querySelectorAll("[data-imp]").forEach((b) => b.onclick = () => startImport(c.id, b.dataset.imp));
-  app.querySelectorAll("[data-del]").forEach((b) => b.onclick = () => deleteDisc(c.id, b.dataset.del));
-  app.querySelectorAll(".trk").forEach((b) => b.onclick = () => {
-    if (b.classList.contains("off")) return toast("Önce bu CD'nin ses dosyalarını yükle");
-    playAt(c.id, b.dataset.d, +b.dataset.i, null, true);
-  });
-}
-
-/* ---------- içe aktarma ---------- */
-let importTarget = null;
-function startImport(cid, did) { importTarget = { cid, did }; $("#picker").value = ""; $("#picker").click(); }
-$("#picker").onchange = async (e) => {
-  const files = [...e.target.files]; if (!files.length || !importTarget) return;
-  const { cid, did } = importTarget;
-  files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
-  toast(`${files.length} dosya kaydediliyor…`, 4000);
-  if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
-  try {
-    const old = loadedNames(cid, did);
-    for (let i = files.length; i < old.length; i++) await delFile(trackKey(cid, did, i));
-    for (let i = 0; i < files.length; i++) {
-      const f = files[i];
-      const blob = new Blob([await f.arrayBuffer()], { type: f.type || "audio/mpeg" });
-      await putFile(trackKey(cid, did, i), blob);
-    }
-    LS.set("names:" + discKey(cid, did), files.map((f) => f.name));
-    const d = course(cid).discs.find((x) => x.id === did);
-    const msg = !d.auto && files.length !== d.tracks.length
-      ? `Yüklendi. Dikkat: kitapçıkta ${d.tracks.length} parça var, sen ${files.length} dosya seçtin.`
-      : `${files.length} parça yüklendi ✓`;
-    toast(msg, 4000);
-  } catch (err) { toast("Kaydedilemedi: " + (err && err.message || err), 5000); }
-  render();
-};
-async function deleteDisc(cid, did) {
-  if (!confirm("Bu CD'nin ses dosyaları telefondan silinsin mi?")) return;
-  const n = loadedNames(cid, did).length;
-  for (let i = 0; i < n; i++) await delFile(trackKey(cid, did, i));
-  LS.set("names:" + discKey(cid, did), []);
-  if (cur && cur.c.id === cid && cur.d.id === did) { au.pause(); au.removeAttribute("src"); cur = null; $("#mini").classList.remove("on"); }
-  render();
+function renderHome(){
+  $("#hdr").innerHTML=`<span class="stripe" aria-hidden="true"></span><h1>Español en el Coche</h1>`;
+  const l=LS.get("last"); let res="";
+  if(l&&course(l.c)){ const c=course(l.c),d=c.discs[l.d],t=d&&d.tracks[l.t];
+    if(t) res=`<button class="resume" id="resume"><span class="ic">${ICON.play(28)}</span><span><small>Kaldığın yer · ${FULL[c.id]} ${esc(d.label)} · ${l.t+1}. bölüm, ${l.p+1}. cümle</small><b>${esc(t.title)}</b></span></button>`; }
+  const vopts=lang=>{ const list=VOICES.filter(v=>v.lang.toLowerCase().startsWith(lang)); const p=pickVoice(lang);
+    return list.length?list.map(v=>`<option value="${esc(v.voiceURI)}" ${p&&v.voiceURI===p.voiceURI?"selected":""}>${esc(v.name)} (${esc(v.lang)})</option>`).join(""):`<option>Ses bulunamadı</option>`; };
+  const opt=(k,arr)=>arr.map(([v,l])=>`<option value="${v}" ${String(S[k])===String(v)?"selected":""}>${l}</option>`).join("");
+  $("#app").innerHTML=`<div class="stack">${res}</div>
+  <h2>Sıfırdan öğrenme sırası</h2>
+  <div class="stack">${COURSES.map(c=>{const s=stats(c),pct=Math.round(s.f/s.tot*100);
+    return `<button class="course" data-go="${c.id}"><span class="n" style="background:${COLORS[c.id]}">${c.step}</span><span class="txt"><b>${FULL[c.id]}</b><p>${esc(c.note)}</p><span class="bar"><i style="width:${pct}%"></i></span><span class="meta">${s.f}/${s.tot} bölüm bitti · ${s.pairs} cümle</span></span></button>`}).join("")}</div>
+  <h2>Okuma ayarları</h2>
+  <div class="settings">
+    <div class="set"><label for="sOrder">Okuma düzeni</label><select id="sOrder">${opt("order",[["pair","İspanyolca → İngilizce, tekrar"],["block","İspanyolca ×2, sonra İngilizce ×2"],["enfirst","İngilizce önce (Michel tarzı)"]])}</select></div>
+    <div class="set"><label for="sReps">Tekrar sayısı</label><select id="sReps">${opt("reps",[[1,"1 kez"],[2,"2 kez"],[3,"3 kez"]])}</select></div>
+    <div class="set"><label for="sRate">Hız<small>Normalin biraz altı önerilir</small></label><select id="sRate">${opt("rate",[[0.8,"Sakin"],[0.9,"Biraz yavaş"],[1,"Normal"]])}</select></div>
+    <div class="set"><label for="sGap">Cümle arası duraklama<small>Uzun: cevabı sen söyle</small></label><select id="sGap">${opt("gap",[["short","Kısa"],["normal","Normal"],["long","Uzun"]])}</select></div>
+    <div class="set"><label for="sEs">İspanyolca ses</label><select id="sEs">${vopts("es")}</select></div>
+    <div class="set"><label for="sEn">İngilizce ses</label><select id="sEn">${vopts("en")}</select></div>
+    <div class="set"><label>Sesleri dene</label><button class="test" id="tryV">▶ Dinle</button></div>
+  </div>
+  <h2>Bilmen gerekenler</h2>
+  <div class="stack">
+    <div class="note"><b>Arabada:</b> Uygulama ekranda açık kalsın. Telefon kilitlenirse iPhone seslendirmeyi durdurur. Uygulama açıkken ekranı uyanık tutmaya çalışır; yine de kararırsa Ayarlar → Ekran ve Parlaklık → Otomatik Kilit → Asla seç.</div>
+    <div class="note"><b>Daha doğal ses için:</b> iPhone Ayarlar → Erişilebilirlik → Seslendirilen İçerik → Sesler → İspanyolca → "Mónica (Gelişmiş)" ya da "Paulina (Gelişmiş)" indir. Sonra burada seç.</div>
+    <div class="note"><b>Diğer PDF'ler:</b> Total Spanish = Foundation + Vocabulary başı · Masterclass = Language Builder · Start/Introductory = Foundation'ın başı. Hepsi bu dört kursun içinde.</div>
+  </div>`;
+  const a=$("#app");
+  a.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>location.hash=b.dataset.go);
+  const r=$("#resume"); if(r) r.onclick=()=>{ start(l.c,l.d,l.t,l.p); $("#car").hidden=false; };
+  const bind=(id,k,num)=>$(id).onchange=e=>{S[k]=num?+e.target.value:e.target.value;saveS();};
+  bind("#sOrder","order"); bind("#sReps","reps",1); bind("#sRate","rate",1); bind("#sGap","gap"); bind("#sEs","esVoice"); bind("#sEn","enVoice");
+  $("#tryV").onclick=()=>{ if(!synth) return toast("Seslendirme desteklenmiyor"); pause(); synth.cancel();
+    const a1=new SpeechSynthesisUtterance("Hola, ¿cómo estás? Vamos a aprender español."); const v1=pickVoice("es"); if(v1){a1.voice=v1;a1.lang=v1.lang;} else a1.lang="es-ES"; a1.rate=S.rate;
+    const a2=new SpeechSynthesisUtterance("Hello, how are you? Let's learn Spanish."); const v2=pickVoice("en"); if(v2){a2.voice=v2;a2.lang=v2.lang;} else a2.lang="en-US"; a2.rate=S.rate;
+    synth.speak(a1); synth.speak(a2); };
 }
 
-/* ---------- çalar ---------- */
-const au = $("#au");
-let cur = null, curURL = null, rate = LS.get("rate", 1);
-au.playbackRate = rate;
-
-async function playAt(cid, did, i, startTime, autoplay) {
-  const c = course(cid), d = c.discs.find((x) => x.id === did), t = discTracks(c, d)[i];
-  if (!t || !t.file) return;
-  const blob = await getFile(t.key);
-  if (!blob) { toast("Ses dosyası bulunamadı, tekrar yükle"); return; }
-  if (curURL) URL.revokeObjectURL(curURL);
-  curURL = URL.createObjectURL(blob);
-  cur = { c, d, t };
-  au.src = curURL; au.playbackRate = rate;
-  const last = LS.get("last");
-  const resumeAt = startTime != null ? startTime : (last && last.c === cid && last.d === did && last.i === i ? last.time : 0);
-  au.addEventListener("loadedmetadata", function once() {
-    au.removeEventListener("loadedmetadata", once);
-    if (resumeAt && resumeAt < au.duration - 3) au.currentTime = resumeAt;
-  });
-  savePos(0);
-  if (autoplay) au.play().catch(() => {});
-  updateUI(); setMedia(); syncNowMarkers();
+function renderCourse(c){
+  $("#hdr").innerHTML=`<button class="back" id="back" aria-label="Geri">‹</button><h1>${FULL[c.id]}</h1>`;
+  $("#back").onclick=()=>location.hash="";
+  $("#app").innerHTML=`<div class="stack"><div class="note">${esc(c.note)} Bir bölüme dokun, okumaya başlasın; bitince sıradaki bölüme kendisi geçer.</div>
+  ${c.discs.map((d,di)=>`<section class="disc"><div class="disc-h"><b>${esc(d.label)}</b><span>${d.tracks.length} bölüm</span><button class="playall" data-d="${di}">▶ Baştan</button></div>
+    ${d.tracks.map((t,ti)=>{const k=tKey(c.id,di,ti),on=done.has(k);
+      return `<button class="trk" data-k="${k}" data-d="${di}" data-t="${ti}"><span class="num">${ti+1}</span><span class="t">${esc(t.title)}<span>${esc(t.pairs.map(p=>p[0]).join(" · "))}</span></span><span class="ck ${on?"on":""}">${on?"✓":""}</span></button>`}).join("")}</section>`).join("")}</div>`;
+  const a=$("#app");
+  a.querySelectorAll(".trk").forEach(b=>b.onclick=()=>{ start(c.id,+b.dataset.d,+b.dataset.t,0); $("#car").hidden=false; });
+  a.querySelectorAll(".playall").forEach(b=>b.onclick=()=>{ start(c.id,+b.dataset.d,0,0); $("#car").hidden=false; });
+  ui();
 }
-function step(dir) {
-  if (!cur) return;
-  const q = courseQueue(cur.c), idx = q.findIndex((x) => x.t.key === cur.t.key), n = q[idx + dir];
-  if (n) playAt(n.c.id, n.d.id, n.t.i, 0, true);
-  else if (dir > 0) { toast("Bu kursun yüklü son parçası bitti 🎉"); }
-}
-function prev() { if (au.currentTime > 5) au.currentTime = 0; else step(-1); }
-function toggle() { if (!cur) { const l = LS.get("last"); if (l) playAt(l.c, l.d, l.i, l.time, true); return; } au.paused ? au.play() : au.pause(); }
-function savePos(t) { if (cur) LS.set("last", { c: cur.c.id, d: cur.d.id, i: cur.t.i, time: t ?? au.currentTime }); }
+function route(){ const h=location.hash.slice(1); const c=course(h); c?renderCourse(c):renderHome(); window.scrollTo(0,0); ui(); }
 
-au.addEventListener("ended", () => { if (cur) { done.add(cur.t.key); saveDone(); } step(1); });
-au.addEventListener("play", updateUI); au.addEventListener("pause", () => { updateUI(); savePos(); });
-let lastSave = 0;
-au.addEventListener("timeupdate", () => {
-  const p = au.duration ? au.currentTime / au.duration : 0;
-  $("#miniProg").style.width = (p * 100) + "%";
-  if (!seeking) $("#seek").value = Math.round(p * 1000);
-  $("#tCur").textContent = fmt(au.currentTime); $("#tDur").textContent = fmt(au.duration);
-  if (Date.now() - lastSave > 4000) { lastSave = Date.now(); savePos(); }
-  if ("setPositionState" in (navigator.mediaSession || {}) && au.duration) {
-    try { navigator.mediaSession.setPositionState({ duration: au.duration, position: au.currentTime, playbackRate: au.playbackRate }); } catch {}
-  }
-});
+$("#miniOpen").onclick=e=>{ if(e.target.closest("#miniPP")) return toggle(); $("#car").hidden=false; };
+$("#carClose").onclick=()=>{ $("#car").hidden=true; route(); };
+$("#bPlay").onclick=toggle;
+$("#bPrev").onclick=()=>jumpPair(P&&P.ph>0?0:-1);
+$("#bNext").onclick=()=>jumpPair(1);
+$("#bPrevT").onclick=()=>{ if(!P) return; token++; synth&&synth.cancel(); clearTimeout(timer); nextTrack(playing,-1); };
+$("#bNextT").onclick=()=>{ if(!P) return; token++; synth&&synth.cancel(); clearTimeout(timer); nextTrack(playing,1); };
+window.addEventListener("hashchange",route);
+// iOS'ta uzun okumalarda motorun takılmasını önle
+setInterval(()=>{ if(playing&&synth&&synth.paused) synth.resume(); },5000);
 
-function updateUI() {
-  const on = !!cur; $("#mini").classList.toggle("on", on); if (!on) return;
-  const ic = au.paused ? ICON.play : ICON.pause;
-  $("#miniPP").innerHTML = ic; $("#play").innerHTML = ic.replace(/34/g, "54");
-  $("#miniInfo b").textContent = cur.t.title;
-  $("#miniInfo small").textContent = `${cur.c.short} · ${cur.d.label} · ${cur.t.i + 1}. parça`;
-  $("#cCourse").textContent = `${cur.c.short} · ${cur.d.label}`;
-  $("#cTitle").textContent = cur.t.title;
-  $("#cRef").textContent = `${cur.t.i + 1}. parça${cur.t.ref ? " · " + cur.t.ref : ""}`;
-  $("#markDone").textContent = done.has(cur.t.key) ? "✓ Bitti" : "Bitti say";
-  $("#markDone").style.color = done.has(cur.t.key) ? "var(--ok)" : "";
-}
-function syncNowMarkers() {
-  document.querySelectorAll(".trk.now").forEach((e) => e.classList.remove("now"));
-  if (cur) { const el = document.querySelector(`.trk[data-k="${CSS.escape(cur.t.key)}"]`); if (el) el.classList.add("now"); }
-}
-function setMedia() {
-  if (!("mediaSession" in navigator) || !cur) return;
-  const ms = navigator.mediaSession;
-  ms.metadata = new MediaMetadata({
-    title: `${cur.t.i + 1}. ${cur.t.title}`, artist: "Michel Thomas · İspanyolca", album: `${cur.c.short} – ${cur.d.label}`,
-    artwork: [{ src: "icon-512.png", sizes: "512x512", type: "image/png" }]
-  });
-  const h = { play: () => au.play(), pause: () => au.pause(), nexttrack: () => step(1), previoustrack: prev,
-    seekto: (e) => { if (e.seekTime != null) au.currentTime = e.seekTime; } };
-  for (const [k, f] of Object.entries(h)) { try { ms.setActionHandler(k, f); } catch {} }
-}
-
-/* kontroller */
-$("#miniPP").onclick = (e) => { e.stopPropagation(); toggle(); };
-$("#mini").onclick = () => $("#car").classList.add("on");
-$("#carClose").onclick = () => $("#car").classList.remove("on");
-$("#play").onclick = toggle; $("#next").onclick = () => step(1); $("#prev").onclick = prev;
-$("#prev").innerHTML = ICON.prev; $("#next").innerHTML = ICON.next;
-$("#back15").onclick = () => au.currentTime = Math.max(0, au.currentTime - 15);
-$("#fwd15").onclick = () => au.currentTime = Math.min(au.duration || 0, au.currentTime + 15);
-$("#markDone").onclick = () => { if (!cur) return; done.has(cur.t.key) ? done.delete(cur.t.key) : done.add(cur.t.key); saveDone(); updateUI(); };
-const SPEEDS = [0.8, 0.9, 1, 1.1, 1.25];
-const showRate = () => $("#spd").textContent = (Number.isInteger(rate) ? rate.toFixed(1) : String(rate)) + "×";
-$("#spd").onclick = () => { rate = SPEEDS[(SPEEDS.indexOf(rate) + 1) % SPEEDS.length] || 1; au.playbackRate = rate; LS.set("rate", rate); showRate(); };
-showRate();
-let seeking = false;
-$("#seek").oninput = () => { seeking = true; if (au.duration) $("#tCur").textContent = fmt($("#seek").value / 1000 * au.duration); };
-$("#seek").onchange = () => { if (au.duration) au.currentTime = $("#seek").value / 1000 * au.duration; seeking = false; };
-document.addEventListener("visibilitychange", () => { if (document.hidden) savePos(); });
-
-/* başlat */
-window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
-openDB().then(render).catch(() => { render(); toast("Tarayıcı depolaması açılamadı (gizli sekme olabilir)"); });
-if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
+const l0=LS.get("last"); if(l0&&course(l0.c)){ P={c:l0.c,d:l0.d,t:l0.t,p:l0.p,ph:0}; }
+route();
 </script>
-</body>
-</html>
+
+<script>if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});</script>
+</body></html>
